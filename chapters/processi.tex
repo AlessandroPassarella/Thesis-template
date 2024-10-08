@@ -1,6 +1,117 @@
 \chapter{Processi e metodologie}
 \label{cap:processi-metodologie}
 
-\intro{Brevissima introduzione al capitolo}\\
+\intro{In questo capitolo verranno riportati in modo approfondito lo scopo e gli obiettivi dello stage, contestualizzazione delle attività alla realtà aziendale e scadenzario delle stesse.}\\
 
-\section{Processo sviluppo prodotto}
+\section{Contesto (chiara)}
+
+\section{Introduzione al progetto}
+
+\section{Vincoli temporali e tecnologici}
+L'unico vincolo tecnologico che mi è stato imposto è stato lo sviluppo dell'algoritmo tramite il linguaggio python per favorire la semplicità dello sviluppo e rendere il processo più efficiente. Essendo un algoritmo di ottimizzazione, linguaggi come il c++ si prestano meglio, data la scarsa efficienza nell'esecuzione del codice python, tuttavia python rimane una scelta solida in vista di un possibile porting ad un linguaggio più efficiente.
+Prima di iniziare lo stage è stato concordato con l’azienda un piano di lavoro su un totale di 304 ore, lavorando 5 giorni a settimana, 8 ore per ciascun giorno eccetto il venerdì che per politica aziendale prevede 6,5 ore. 
+
+\section{Obiettivi}
+Ogni obiettivo è provvisto di un codice identificativo formato da una delle seguenti stringhe \textbf{OB, DE, FA}, che rappresentano il livello di importanza e da un numero incrementale positivo, che rispetta la seguente nomenclatura:
+\begin{center}
+    [Importanza][Identificativo]
+\end{center}
+Gli obbiettivi rappresentano ciò che vogliamo ottenere dell'attività di stage e sono divisi, a seconda dell'importanza, come segue:
+\begin{itemize}
+    \item Obiettivi obbligatori - \textbf{OB}: 
+    Rappresentano gli obiettivi vincolanti che dovranno essere necessariamente soddisfatti;
+    \item Obiettivi desiderabili - \textbf{DE}:
+    Rappresentano gli obiettivi non vincolanti ma dal riconoscibile valore aggiunto;
+    \item Obiettivi facoltativi - \textbf{FA}:
+    Rappresentano gli obiettivi facoltativi non vincolanti ma dal valore aggiunto non strettamente competitivo.
+\end{itemize}
+Ogni obbiettivo è affiancato da una breve descrizione.
+
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|p{10cm}|}
+\hline
+\textbf{Obiettivo} & \textbf{Descrizione} \\ \hline
+OB1 & Studio e conoscenza di algoritmi euristici e metaeuristici nella letteratura della Ricerca Operativa \\ \hline
+OB2 & Definizione del problema di nesting in esame \\ \hline
+OB3 & Conoscenza del framework fornito dall’azienda con funzionalità di natura geometrica e di ottimizzazione nel contesto del nesting \\ \hline
+OB4 & Implementazione di un algoritmo genetico per la risoluzione del problema di nesting in esame \\ \hline
+OB5 & Verifica su benchmark aziendali dell’algoritmo, confrontandolo con soluzioni ottenute da altri metodi risolutivi interni all’azienda \\ \hline
+OB6 & Documentazione del codice e manuale di utilizzo dei moduli sviluppati \\ \hline
+\end{tabular}
+\caption{Obiettivi Obbligatori}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|p{10cm}|}
+\hline
+\textbf{Obiettivo} & \textbf{Descrizione} \\ \hline
+DE1 & Analisi statistica per una validazione rigorosa e valutazione della significatività dei risultati ottenuti \\ \hline
+\end{tabular}
+\caption{Obiettivi Desiderabili}
+\end{table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|p{10cm}|}
+\hline
+\textbf{Obiettivo} & \textbf{Descrizione} \\ \hline
+FA1 & Adattamento e test dell'algoritmo genetico sviluppato su problemi di nesting simili a quello definito (ad esempio problemi con forme regolari/irregolari, strip packing) \\ \hline
+\end{tabular}
+\caption{Obiettivi Facoltativi}
+\end{table}
+
+\section{Pianificazione}
+
+Divisione delle attività da svolgere con una stima in termini di ore della durata di ciascuna attività.\\
+
+\begin{table}[H]
+\centering
+\begin{tabular}{|l|p{10cm}|}
+\hline
+\textbf{Durata in ore} & \textbf{Descrizione dell'attività} \\ \hline
+30 & Studio della letteratura di Ricerca Operativa nell’ambito delle euristiche di ottimizzazione combinatoria e degli algoritmi genetici \\ \hline
+10 & Studio delle tecnologie necessarie allo sviluppo dell’algoritmo di ottimizzazione (python, librerie di ottimizzazione) \\ \hline
+60 & Definizione del problema di nesting e analisi degli algoritmi esistenti e della loro implementazione \\ \hline
+130 & Sviluppo algoritmo genetico:
+\begin{itemize}
+    \item Progettazione degli operatori di codifica e decodifica delle soluzioni basati su euristiche costruttive (30 ore)
+    \item Progettazione degli operatori di fitness, selezione e rimpiazzo generazionale (10 ore)
+    \item Implementazione delle componenti algoritmiche (80 ore)
+    \item Test degli algoritmi implementati su istanze di prova (10 ore)
+\end{itemize} \\ \hline
+44 & Test dell'algoritmo sviluppato su benchmark di letteratura e aziendali. Analisi statistica dei risultati prodotti su diversi benchmark confrontandoli con quelli dei metodi sviluppati dall'azienda \\ \hline
+30 & Stesura documentazione codice e manuale di utilizzo dei modelli sviluppati \\ \hline
+\textbf{Totale: 304 ore} & \\ \hline
+\end{tabular}
+\caption{Pianificazione del lavoro}
+\end{table}
+
+\section{Ambiente di lavoro}
+%python, vscode, github, github desktop, jupyter notebook, librerie python
+\subsection{Metodo di sviluppo}
+Il ciclo di vita dell'algoritmo he seguito i seguenti passi:
+\begin{itemize}
+    \item Definizione del problema: (sentire nicola);
+    \item Analisi letteratura: lettura articoli accademici riportanti problemi simili o idee per lo sviluppo degli stessi;
+    \item Modellazione del problema: (sentire nicola);
+    \item Sviluppo: codifica dell'algoritmo e integrazione con il (lavoro di chiara);
+    \item Verifica: testing massivo e verifica della soluzione fornita.
+\end{itemize}
+
+\subsection{Gestione di progetto}
+Per quanto riguarda la gestione di progetto sono stati utilizzati alcuni strumenti descritti con maggiore dettaglio nel Capitolo 6. In generale per la gestione della comunicazione, condivisione di informazioni, documentazione e articoli si è fatto uso dell’applicazione Microsoft Teams, per il versionamento e la gestione dei task si è fatto uso del servizio GitHub, infine per quanto riguarda l’interfaccia con cui versionare ho utilizzato GitHub Desktop.
+
+\subsection{Linguaggio di programmazione e ambiente di sviluppo}
+Per la fase iniziale della codifica si è lavorato utilizzando Jupyter notebook oppure, con il quale è stato possibile scrivere metodi in linguaggio Python in modo molto agevole. Quando l'algoritmo ha raggiunto una certa completezza è stato necessario raggruppare i vari metodi in più classi e iniziare a lavorare su VS Code all'algoritmo e su Jupyter Notebook ai test da effettuare.
+Python è un linguaggio di programmazione orientato agli oggetti ed interpretato dinamicamente al momento dell’esecuzione da un interprete. Python risulta veramente versatile in quanto fornisce incredibili funzionalità utilizzabili in modo semplice e intuitivo, inoltre, dispone di moltissime librerie che permettono le più svariate operazioni, come: metodi per l'analisi statistica, la manipolazione dei dati, la creazione di grafici e operazioni sui file.
+
+\section{Analisi dei rischi}
+
+\begin{risk}{Performance del simulatore hardware}
+    \riskdescription{le performance del simulatore hardware e la comunicazione con questo potrebbero risultare lenti o non abbastanza buoni da causare il fallimento dei test}
+    \risksolution{coinvolgimento del responsabile a capo del progetto relativo il simulatore hardware}
+    \label{risk:hardware-simulator} 
+\end{risk}
