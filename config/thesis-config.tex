@@ -71,7 +71,7 @@
 
 
 \captionsetup{
-    tableposition=top,
+    tableposition=bottom,
     figureposition=bottom,
     font=small,
     format=hang,
@@ -137,25 +137,29 @@
 
 \newcommand{\intro}[1]{\emph{\textsf{#1}}}
 
-% Risks environment
-\newcounter{riskcounter}                % define a counter
-\setcounter{riskcounter}{0}             % set the counter to some initial value
+% % Risks environment
+% \newcounter{riskcounter}                % define a counter
+% \setcounter{riskcounter}{0}             % set the counter to some initial value
 
-%%%% Parameters
-% #1: Title
-\newenvironment{risk}[1]{
-    \refstepcounter{riskcounter}        % increment counter
-    \par \noindent                      % start new paragraph
-    \textbf{\arabic{riskcounter}. #1}   % display the title before the content of the environment is displayed
-}{
-    \par\medskip
-}
+% %%%% Parameters
+% % #1: Title
+% \newenvironment{risk}[1]{
+%     \refstepcounter{riskcounter}        % increment counter
+%     \par \noindent                      % start new paragraph
+%     \textbf{\arabic{riskcounter}. #1}   % display the title before the content of the environment is displayed
+% }{
+%     \par\medskip
+% }
 
-\newcommand{\riskname}{Rischio}
+% \newcommand{\riskname}{Rischio}
 
-\newcommand{\riskdescription}[1]{\textbf{\\Descrizione:} #1.}
+% \newcommand{\riskdescription}[1]{\textbf{\\Descrizione:} #1;}
 
-\newcommand{\risksolution}[1]{\textbf{\\Soluzione:} #1.}
+% \newcommand{\risklevel}[1]{\textbf{\\Grado di rischio:} #1;}
+
+% \newcommand{\riskdangerous}[1]{\textbf{\\Pericolosità:} #1;}
+
+% \newcommand{\risksolution}[1]{\textbf{\\Soluzione:} #1.}
 
 % Use case environment
 \newcounter{usecasecounter}             % define a counter
@@ -200,3 +204,61 @@
 \usepackage{float}
 
 \renewcommand{\arraystretch}{1.7}
+
+% %tabelle rischi
+% \newenvironment{risk}[1]{
+%     \renewcommand{\arraystretch}{1.7}
+%     \noindent
+%     \begin{table}[htbp]
+%         \centering
+%         \begin{tabular}{|p{4cm}|p{8cm}|}
+%             \hline
+%             \multicolumn{2}{|c|}{\textbf{#1}} \\ \hline
+%         }{
+%             \hline
+%         \end{tabular} NON FUNZIONA MANCA CAPTION
+%     \end{table}
+% }
+
+% \newcommand{\riskdescription}[1]{
+%     \textbf{Descrizione} & #1 \\ \hline
+% }
+
+% \newcommand{\riskdegree}[1]{
+%     \textbf{Grado di rischio} & #1 \\ \hline
+% }
+
+% \newcommand{\riskdangerous}[1]{
+%     \textbf{Pericolosità} & #1 \\ \hline
+% }
+
+% \newcommand{\riskprevention}[1]{
+%     \textbf{Precauzioni} & #1 \\ \hline
+%     }
+
+% \newcommand{\risksolution}[1]{
+%     \textbf{Soluzione} & #1 \\ \hline
+% }
+
+\newcommand{\risk}[6]{
+    \begin{table}[htbp]
+        \centering
+        \renewcommand{\arraystretch}{1.7}
+        \begin{tabular}{|p{4cm}|p{8cm}|}
+            \hline
+            \multicolumn{2}{|c|}{\textbf{#1}} \\
+            \hline
+            \textbf{Descrizione} & #2 \\
+            \hline
+            \textbf{Grado di rischio} & #3 \\
+            \hline
+            \textbf{Pericolosità} & #4 \\
+            \hline
+            \textbf{Precauzioni} & #5 \\
+            \hline
+            \textbf{Soluzione} & #6 \\
+            \hline
+        \end{tabular}
+        \caption{#1}
+    \end{table}
+}

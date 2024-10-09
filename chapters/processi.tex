@@ -8,21 +8,22 @@
 \section{Introduzione al progetto}
 
 \section{Vincoli temporali e tecnologici}
-L'unico vincolo tecnologico che mi è stato imposto è stato lo sviluppo dell'algoritmo tramite il linguaggio python per favorire la semplicità dello sviluppo e rendere il processo più efficiente. Essendo un algoritmo di ottimizzazione, linguaggi come il c++ si prestano meglio, data la scarsa efficienza nell'esecuzione del codice python, tuttavia python rimane una scelta solida in vista di un possibile porting ad un linguaggio più efficiente.
+L'unico vincolo tecnologico che mi è stato imposto è stato lo sviluppo dell'algoritmo tramite il linguaggio Python. Questo perché python rendere il processo di sviluppo più efficiente, infatti, è particolarmente adatto al fast prototyping, dato che non necessita di compilazione, a differenza di linguaggi come C++ e Java, e, inoltre, permette di avere maggiore flessibilità del codice grazie anche dall'uso dei notebook.
+
 Prima di iniziare lo stage è stato concordato con l’azienda un piano di lavoro su un totale di 304 ore, lavorando 5 giorni a settimana, 8 ore per ciascun giorno eccetto il venerdì che per politica aziendale prevede 6,5 ore. 
 
 \section{Obiettivi}
-Ogni obiettivo è provvisto di un codice identificativo formato da una delle seguenti stringhe \textbf{OB, DE, FA}, che rappresentano il livello di importanza e da un numero incrementale positivo, che rispetta la seguente nomenclatura:
+Ogni obiettivo è provvisto di un codice identificativo formato da una delle seguenti stringhe \textbf{OB}, \textbf{DE} e \textbf{FA}, che rappresentano il livello di importanza e da un numero incrementale positivo, che rispetta la seguente nomenclatura:
 \begin{center}
     [Importanza][Identificativo]
 \end{center}
 Gli obbiettivi rappresentano ciò che vogliamo ottenere dell'attività di stage e sono divisi, a seconda dell'importanza, come segue:
 \begin{itemize}
-    \item Obiettivi obbligatori - \textbf{OB}: 
+    \item Obiettivi obbligatori \textbf{(OB)}: 
     Rappresentano gli obiettivi vincolanti che dovranno essere necessariamente soddisfatti;
-    \item Obiettivi desiderabili - \textbf{DE}:
+    \item Obiettivi desiderabili \textbf{(DE)}:
     Rappresentano gli obiettivi non vincolanti ma dal riconoscibile valore aggiunto;
-    \item Obiettivi facoltativi - \textbf{FA}:
+    \item Obiettivi facoltativi \textbf{(FA)}:
     Rappresentano gli obiettivi facoltativi non vincolanti ma dal valore aggiunto non strettamente competitivo.
 \end{itemize}
 Ogni obbiettivo è affiancato da una breve descrizione.
@@ -94,9 +95,8 @@ Divisione delle attività da svolgere con una stima in termini di ore della dura
 \subsection{Metodo di sviluppo}
 Il ciclo di vita dell'algoritmo he seguito i seguenti passi:
 \begin{itemize}
-    \item Definizione del problema: (sentire nicola);
-    \item Analisi letteratura: lettura articoli accademici riportanti problemi simili o idee per lo sviluppo degli stessi;
-    \item Modellazione del problema: (sentire nicola);
+    \item Comprensione del problema: definizione del problema di nesting;
+    \item Analisi letteratura: lettura articoli accademici di algoritmi genetici;
     \item Sviluppo: codifica dell'algoritmo e integrazione con il (lavoro di chiara);
     \item Verifica: testing massivo e verifica della soluzione fornita.
 \end{itemize}
@@ -110,8 +110,64 @@ Python è un linguaggio di programmazione orientato agli oggetti ed interpretato
 
 \section{Analisi dei rischi}
 
-\begin{risk}{Performance del simulatore hardware}
-    \riskdescription{le performance del simulatore hardware e la comunicazione con questo potrebbero risultare lenti o non abbastanza buoni da causare il fallimento dei test}
-    \risksolution{coinvolgimento del responsabile a capo del progetto relativo il simulatore hardware}
-    \label{risk:hardware-simulator} 
-\end{risk}
+Questa sezione del documento si concentra sull’analisi delle potenziali difficoltà che potrebbero emergere durante il corso dello stage, con l’obiettivo di identificare, analizzare e prevenire eventuali ostacoli o rallentamenti che potrebbero comprometterne il progresso complessivo. Per affrontare queste possibili problematiche, si è scelto di esaminare attentamente ciascun rischio, fornendo dettagli quali la descrizione del rischio, il grado di rischio associato, la pericolosità, le precauzioni da adottare e una possibile soluzione. Il grado di rischio definisce la possibilità di occorrenza dello stesso e varia da una scala crescente da 1 a 5, mentre la pericolosità varia tra “Alta”, “Media” e “Bassa”. 
+
+Le informazioni vengono presentante in forma tabellare, in modo da facilitarne il monitoraggio continuo durante l’intero ciclo di vita del progetto. Ogni rischio è provvisto di un codice identificativo formato da una delle seguenti stringhe \textbf{RP}, \textbf{RO} e \textbf{RT}, che rappresentano la categoria di rischo e da un numero incrementale positivo. Le principali categorie di rischi considerate includono:
+\begin{itemize}
+    \item Rischi personali \textbf{(RP)};
+    \item Rischi organizzativi \textbf{(RO)};
+    \item Rischi tecnologici/software \textbf{(RT)}.
+\end{itemize}
+I rischi rispettano la seguente nomenclatura:
+\begin{center}
+    [Categoria][Identificativo]
+\end{center}
+
+\risk{RP1 - Mancanza di competenze tecniche specifiche}
+{Mancanza di esperienze professionali nella realizzazione dell'algoritmo. Mancanza di conoscenze delle tecnologie necessarie allo sviluppo del prodotto.}
+{2}
+{Alta}
+{Fase iniziale di studio delle tecnologie.}
+{Comunicazione con tutor aziendale per concordare misure di adattamento.}
+
+\risk{RP2 - Mancanza di conoscenze teoriche specifiche}
+{Mancanza di conoscenze relative al problema in questione. Mancanza di conoscenza specifiche dell'ambito industriale.}
+{5}
+{Media}
+{Fase iniziale di studio del problema di nesting e dell'approccio aziendale.}
+{Comunicazione con tutor aziendale per concordare misure di adattamento.}
+
+\risk{RP3 - Salute e malattia}
+{Malattia o problematiche di salute mentale. Questa problematica potrebbe essere poco evidente dato lo svolgersi dello stage in periodo estivo ma particolarmente impattante dato il calendario fissato di giorni lavorativi.}
+{1}
+{Alta}
+{-}
+{Concordare con l'azienda giorni extra per raggiungere le ore previste.}
+
+\risk{RO1 - Fornitura}
+{Ritardi nella fornitura di risorse esterne. Mancato accesso a strumenti o risorse software necessari per lo sviluppo.}
+{3}
+{Alta}
+{Comunicazioni rapide e chiare, misure di approvvigionamento alternative. Invio di domande e/o richieste di materiale all'azienza.}
+{Comunicazione con tutor aziendale e azienza per concordare misure di adattamento.}
+
+\risk{RO2 - Organizzazione attività inefficiente}
+{Metodologia erronea o poco efficiente nel separare attività.}
+{2}
+{Media}
+{Studio a monte delle fasi di sviluppo e test dell'algoritmo.}
+{Adattamento alla situazione integrando da attività precedenti.}
+
+\risk{RT1 - Incompatibilità tra diverse tecnologie o componenti software}
+{Situazione presentante difficoltà nell’integrare le diverse tecnologie coinvolte.}
+{1}
+{Media}
+{Studio a monte delle tecnologie e conseguente scelta ragionata delle stesse.}
+{Comunicazione con tutor aziendale per concordare misure di adattamento.}
+
+\risk{RT2 - Aggiornamenti o modifiche agli strumenti tecnologici in uso}
+{Situazione nella quale alcune tecnologie individuate risultino indisponibili o aventi modifiche sostanziali potenzialmente invalidanti il lavoro svolto fino a quel punto.}
+{1}
+{Alta}
+{Scelta ponderata delle tecnologie. Costruire un ambiente flessibile ai cambiamenti.}
+{Comunicazione con tutor aziendale per concordare misure di adattamento.}
