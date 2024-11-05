@@ -4,8 +4,35 @@
 \intro{In questo capitolo verranno riportati in modo approfondito lo scopo e gli obiettivi dello stage, contestualizzazione delle attività alla realtà aziendale e scadenzario delle stesse.}\\
 
 \section{Contesto (chiara)}
+Il contesto nella quale va a inserirsi la tesi riguarda in senso generale i Cutting and Packing Problems (C\&PP). 
+In ricerca operativa i C\&PP sono una famiglia ampia di problemi di ottimizzazione il cui compito è quello di tagliare o imballare oggetti in spazi o contenitori definiti, cercando di ottimizzare vari obiettivi (es. minimizzare gli sprechi, massimizzare il numero di oggetti imballati).
+
+Includono sia il problema di taglio, come nel Cutting Stock Problem (CSP), ma aggiungono un aspetto legato all'imballaggio (packing). 
+L'obiettivo può variare dal massimizzare l'efficienza di imballaggio (riempire spazi o contenitori) al soddisfacimento di vincoli geometrici o logistici.
+Esistono 3 tipi di C\&PP in base al numero di dimensioni (che possono essere 1, 2 o 3) che possiedono sia per gli oggetti da tagliare che i contenitori in cui inserirli.
+
+Il 2DC\&PP riguarda l'assegnazione di piccoli oggetti rettangolari su lamiere più grandi, ottimizzando l'utilizzo della superficie (2 dimensioni) disponibile per minimizzare lo spreco di materiale. 
+Questo problema emerge spesso nel contesto dell'industria della lamiera, dove vengono utilizzate tecnologie come punzonatura e taglio laser. 
+Il caso di studio presentato fa riferimento alla Salvagnini Italia S.p.A., una società specializzata nella produzione di sistemi di taglio per la lamiera. 
+In Salvagnini è presente una dottoranda che ha svolto un progetto riguardante il 2C\&PP nella quale si inserisce l'algoritmo in questione di questa tesi. 
 
 \section{Introduzione al progetto}
+L'obbiettivo del lavoro svolto durante lo stage era quello di creare un algoritmo che risolvesse una parte del problema di chiara riguardante il nesting.
+
+\subsection{Definizione del problema}
+cutting stock -> nesting
+
+\subsection{Tipologia di macchina}
+Macchina punzonatrice: utilizza strumenti rotanti per perforare la lamiera, seguiti da una cesoia di scarico per separare le parti lavorate dalla lamiera.
+
+\subsection{Processo produttivo}
+Il processo di taglio inizia con ordini da clienti, che specificano parti da produrre da fogli di lamiera rettangolari. Ogni parte viene lavorata in due fasi: la punzonatura per definire il contorno e l'uso di una cesoia per separare il pezzo dal foglio. Le parti devono essere disposte sui fogli senza sovrapporsi e rispettando vincoli geometrici e tecnologici.
+
+\subsection{Vincoli e ottimizzazione}
+Il problema comporta diversi vincoli da rispettare, tra cui margini di sicurezza tra le parti, precedenze rigide o flessibili (a seconda delle priorità di produzione) e limitazioni nella rotazione degli oggetti. L'obiettivo è minimizzare gli sprechi di materiale ottimizzando la disposizione delle parti su ciascun foglio.
+
+\subsection{Funzione obbiettivo}
+Il compito dell'ottimizzazione è definire una sequenza di layout di taglio che minimizzi lo spreco totale di materiale. Il processo di taglio deve rispettare i vincoli rigidi e, se possibile, ottimizzare anche quelli flessibili senza aumentare lo spreco.
 
 \section{Vincoli temporali e tecnologici}
 L'unico vincolo tecnologico che mi è stato imposto è stato lo sviluppo dell'algoritmo tramite il linguaggio Python. Questo perché python rendere il processo di sviluppo più efficiente, infatti, è particolarmente adatto al fast prototyping, dato che non necessita di compilazione, a differenza di linguaggi come C++ e Java, e, inoltre, permette di avere maggiore flessibilità del codice grazie anche dall'uso dei notebook.
@@ -102,7 +129,7 @@ Il ciclo di vita dell'algoritmo he seguito i seguenti passi:
 \end{itemize}
 
 \subsection{Gestione di progetto}
-Per quanto riguarda la gestione di progetto sono stati utilizzati alcuni strumenti descritti con maggiore dettaglio nel Capitolo 6. In generale per la gestione della comunicazione, condivisione di informazioni, documentazione e articoli si è fatto uso dell’applicazione Microsoft Teams, per il versionamento e la gestione dei task si è fatto uso del servizio GitHub, infine per quanto riguarda l’interfaccia con cui versionare ho utilizzato GitHub Desktop.
+Per quanto riguarda la gestione di progetto sono stati utilizzati alcuni strumenti descritti con maggiore dettaglio nel Capitolo 5. In generale per la gestione della comunicazione, condivisione di informazioni, documentazione e articoli si è fatto uso dell’applicazione Microsoft Teams, per il versionamento e la gestione dei task si è fatto uso del servizio GitHub, infine per quanto riguarda l’interfaccia con cui versionare ho utilizzato GitHub Desktop.
 
 \subsection{Linguaggio di programmazione e ambiente di sviluppo}
 Per la fase iniziale della codifica si è lavorato utilizzando Jupyter notebook oppure, con il quale è stato possibile scrivere metodi in linguaggio Python in modo molto agevole. Quando l'algoritmo ha raggiunto una certa completezza è stato necessario raggruppare i vari metodi in più classi e iniziare a lavorare su VS Code all'algoritmo e su Jupyter Notebook ai test da effettuare.
@@ -152,11 +179,11 @@ I rischi rispettano la seguente nomenclatura:
 {Comunicazione con tutor aziendale e azienza per concordare misure di adattamento.}
 
 \risk{RO2 - Organizzazione attività inefficiente}
-{Metodologia erronea o poco efficiente nel separare attività.}
+{Errori di valutazione in termini di tempistiche per lo svolgimento delle diverse attività pianificate.}
 {2}
 {Media}
 {Studio a monte delle fasi di sviluppo e test dell'algoritmo.}
-{Adattamento alla situazione integrando da attività precedenti.}
+{Comunicazione con tutor aziendale per concordare misure di adattamento.}
 
 \risk{RT1 - Incompatibilità tra diverse tecnologie o componenti software}
 {Situazione presentante difficoltà nell’integrare le diverse tecnologie coinvolte.}
