@@ -3,36 +3,25 @@
 
 \intro{In questo capitolo verranno riportati in modo approfondito lo scopo e gli obiettivi dello stage, contestualizzazione delle attività alla realtà aziendale e scadenzario delle stesse.}\\
 
-\section{Contesto (chiara)}
-Il contesto nella quale va a inserirsi la tesi riguarda in senso generale i Cutting and Packing Problems (C\&PP). 
-In ricerca operativa i C\&PP sono una famiglia ampia di problemi di ottimizzazione il cui compito è quello di tagliare o imballare oggetti in spazi o contenitori definiti, cercando di ottimizzare vari obiettivi (es. minimizzare gli sprechi, massimizzare il numero di oggetti imballati).
+\section{Contesto}
 
-Includono sia il problema di taglio, come nel Cutting Stock Problem (CSP), ma aggiungono un aspetto legato all'imballaggio (packing). 
-L'obiettivo può variare dal massimizzare l'efficienza di imballaggio (riempire spazi o contenitori) al soddisfacimento di vincoli geometrici o logistici.
-Esistono 3 tipi di C\&PP in base al numero di dimensioni (che possono essere 1, 2 o 3) che possiedono sia per gli oggetti da tagliare che i contenitori in cui inserirli.
-
-Il 2DC\&PP riguarda l'assegnazione di piccoli oggetti rettangolari su lamiere più grandi, ottimizzando l'utilizzo della superficie (2 dimensioni) disponibile per minimizzare lo spreco di materiale. 
-Questo problema emerge spesso nel contesto dell'industria della lamiera, dove vengono utilizzate tecnologie come punzonatura e taglio laser. 
-Il caso di studio presentato fa riferimento alla Salvagnini Italia S.p.A., una società specializzata nella produzione di sistemi di taglio per la lamiera. 
-In Salvagnini è presente una dottoranda che ha svolto un progetto riguardante il 2C\&PP nella quale si inserisce l'algoritmo in questione di questa tesi. 
-
-\section{Introduzione al progetto}
-L'obbiettivo del lavoro svolto durante lo stage era quello di creare un algoritmo che risolvesse una parte del problema di chiara riguardante il nesting.
+Nel campo della Ricerca Operativa, il Cutting Stock Problem (CSP) rappresenta una classe di problemi di ottimizzazione combinatoria di rilevanza pratica che coinvolge l'assegnazione di oggetti più piccoli a oggetti più grandi, generalmente con l'obiettivo di minimizzare gli scarti. I problemi di CSP possono differire tra loro per una grande varietà di caratteristiche. Ad esempio, la dimensione sia degli oggetti piccoli che di quelli grandi che può variare da 1 a 3 dimensioni. Il caso bidimensionale riguarda il taglio di oggetti (o parti) da fogli di materiale riducendo gli scarti, come avviene nelle industrie del legno, del vetro e della lamiera.
 
 \subsection{Definizione del problema}
-cutting stock -> nesting
 
-\subsection{Tipologia di macchina}
-Macchina punzonatrice: utilizza strumenti rotanti per perforare la lamiera, seguiti da una cesoia di scarico per separare le parti lavorate dalla lamiera.
+Di seguito, ci concentreremo sulla classe bidimensionale dei problemi di CSP, anche nota come Nesting. Nella maggior parte dei problemi di Nesting, una diretta conseguenza del fatto che gli oggetti vengono tagliati dai fogli di materiale è che, nel costruire una disposizione di taglio posizionando gli oggetti all'interno del foglio, essi non possono sovrapporsi tra loro e devono essere completamente contenuti nel foglio stesso. Pertanto, il compito di ottimizzazione di un problema di Nesting comporta generalmente  evitare la sovrapposizione tra le forme nel piano rispettando determinati vincoli. I vincoli geometrici e la natura combinatoria di questi tipi di problemi li rendono difficili da risolvere in modo ottimale nella maggior parte dei casi. Inoltre, a seconda dell'applicazione, la dimensione delle istanze può variare ampiamente e diventare molto grande così come le dimensioni delle parti che compongono le istanze, motivo per cui sono stati sviluppati diversi approcci metaeuristici per affrontare questa classe di problemi.
 
-\subsection{Processo produttivo}
-Il processo di taglio inizia con ordini da clienti, che specificano parti da produrre da fogli di lamiera rettangolari. Ogni parte viene lavorata in due fasi: la punzonatura per definire il contorno e l'uso di una cesoia per separare il pezzo dal foglio. Le parti devono essere disposte sui fogli senza sovrapporsi e rispettando vincoli geometrici e tecnologici.
+Nel nostro caso occorre tenere conto di diversi vincoli, alcuni classici del Nesting altri specifici per il caso Salvagnini:
+\begin{itemize}
+    \item Non sovrapposizione: gli elementi posizionati su uno stesso foglio non devono sovrapporsi;
+    \item Margini di punzonatura: i margini di punzonatura assegnati devono essere rispettati su tutti i lati di ogni elemento;
+    \item Margini di sicurezza o taglio comune: se gli elementi adiacenti non condividono un bordo (taglio comune, sovrapposizione del margine), devono rispettare il margine di sicurezza;
+    \item Vincoli sulle assegnazioni: gli elementi obbligatori devono necessariamente essere posizionati tutti, mentre quelli opzionali sono utilizzati, anche solo in parte, solo per ridurre gli scarti;
+    \item Vincoli di hard precedence: gli elementi con precedenza hard più alta devono essere posizionati prima di quelli con precedenza più bassa, se presenti (precedenza che non può essere infranta);
+    \item Vinvoli di soft precedence: se due elementi hanno una relazione di precedenza soft, questa va rispettata solo se non comporta un aumento degli scarti (precedenza che può essere infranta);
+    \item Rotazioni consentite: ciascun elemento può essere ruotato solo secondo le angolazioni permesse dagli strumenti di punzonatura.
+\end{itemize}
 
-\subsection{Vincoli e ottimizzazione}
-Il problema comporta diversi vincoli da rispettare, tra cui margini di sicurezza tra le parti, precedenze rigide o flessibili (a seconda delle priorità di produzione) e limitazioni nella rotazione degli oggetti. L'obiettivo è minimizzare gli sprechi di materiale ottimizzando la disposizione delle parti su ciascun foglio.
-
-\subsection{Funzione obbiettivo}
-Il compito dell'ottimizzazione è definire una sequenza di layout di taglio che minimizzi lo spreco totale di materiale. Il processo di taglio deve rispettare i vincoli rigidi e, se possibile, ottimizzare anche quelli flessibili senza aumentare lo spreco.
 
 \section{Vincoli temporali e tecnologici}
 L'unico vincolo tecnologico che mi è stato imposto è stato lo sviluppo dell'algoritmo tramite il linguaggio Python. Questo perché python rendere il processo di sviluppo più efficiente, infatti, è particolarmente adatto al fast prototyping, dato che non necessita di compilazione, a differenza di linguaggi come C++ e Java, e, inoltre, permette di avere maggiore flessibilità del codice grazie anche dall'uso dei notebook.
@@ -118,6 +107,7 @@ Divisione delle attività da svolgere con una stima in termini di ore della dura
 \end{table}
 
 \section{Ambiente di lavoro}
+Di seguito verranno esposti brevemente il ciclo di vita e la gestione del progetto, considerando anche l'ambiente di sviluppo.
 %python, vscode, github, github desktop, jupyter notebook, librerie python
 \subsection{Metodo di sviluppo}
 Il ciclo di vita dell'algoritmo he seguito i seguenti passi:
