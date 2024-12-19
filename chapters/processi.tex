@@ -3,32 +3,40 @@
 
 \intro{In questo capitolo verranno riportati in modo approfondito lo scopo e gli obiettivi dello stage, contestualizzazione delle attività alla realtà aziendale e scadenzario delle stesse.}\\
 
-\section{Contesto}
+\section{Definizione del problema}
 
-Nel campo della Ricerca Operativa, il Cutting Stock Problem (CSP) rappresenta una classe di problemi di ottimizzazione combinatoria di rilevanza pratica che coinvolge l'assegnazione di oggetti più piccoli a oggetti più grandi, generalmente con l'obiettivo di minimizzare gli scarti. I problemi di CSP possono differire tra loro per una grande varietà di caratteristiche. Ad esempio, le dimensioni sia degli oggetti piccoli che di quelli grandi possono variare da 1 a 3 dimensioni. Il caso bidimensionale riguarda il taglio di oggetti (o parti) da fogli di materiale riducendo gli scarti, come avviene nelle industrie del legno, del vetro e della lamiera.
+In Ricerca Operativa, il Cutting Stock Problem (CSP) rappresenta una classe di problemi di ottimizzazione combinatoria di rilevanza pratica che coinvolge l'assegnazione di oggetti più piccoli a oggetti più grandi, generalmente con l'obiettivo di minimizzare gli scarti. I problemi di CSP possono differire tra loro per una grande varietà di caratteristiche. Ad esempio, le dimensioni sia degli oggetti piccoli che di quelli grandi possono variare da 1 a 3 dimensioni. Il caso bidimensionale riguarda il taglio di oggetti (o parti) da fogli di materiale riducendo gli scarti, come avviene nelle industrie del legno, del vetro e della lamiera.
 
-\subsection{Definizione del problema}
+\subsection{Contesto}
 
-Di seguito, ci concentreremo sulla classe bidimensionale dei problemi di CSP, anche nota come Nesting. Nella maggior parte dei problemi di Nesting, una diretta conseguenza del fatto che gli oggetti vengono tagliati dai fogli di materiale è che, nel costruire una disposizione di taglio posizionando gli oggetti all'interno del foglio, essi non possono sovrapporsi tra loro e devono essere completamente contenuti nel foglio stesso. Pertanto, il compito di ottimizzazione di un problema di Nesting comporta generalmente  evitare la sovrapposizione tra le forme nel piano rispettando determinati vincoli. I vincoli geometrici e la natura combinatoria di questi tipi di problemi li rendono difficili da risolvere in modo ottimale nella maggior parte dei casi. Inoltre, a seconda dell'applicazione, la dimensione delle istanze può variare ampiamente e diventare molto grande così come le dimensioni delle parti che compongono le istanze, motivo per cui sono stati sviluppati diversi approcci metaeuristici per affrontare questa classe di problemi.
+Salvagnini produce essenzialmente due tipi di macchine da taglio, equipaggiate con tecnologie di taglio differenti: punzonatura e taglio laser. La tecnologia di punzonatura utilizza una macchina dotata di una testa multipressa che ospita diversi utensili rotanti per perforare la lamiera applicando alta pressione. Inoltre, le macchine di punzonatura Salvagnini presentano una cesoia di scarico integrata composta da due lame, indipendenti e ortogonali tra loro. La cesoia è in grado di tagliare qualsiasi lunghezza ed è utilizzata per staccare ogni pezzo lavorato dalla lamiera. Questa tecnologia di taglio è altamente efficiente per produrre diversi tipi di pezzi, tendenzialmente di forma regolare con eventuali scantonarure negli angoli. D'altra parte, le macchine da taglio laser hanno una testa ottica singola integrata con un sistema di raffreddamento a secco per controllare la temperatura delle ottiche, garantendo tagli estremamente precisi. La precisione del taglio laser consente di produrre forme intricate con dettagli fini e alta accuratezza.
 
-Nel nostro caso occorre tenere conto di diversi vincoli, alcuni classici del Nesting altri specifici per il caso Salvagnini:
-\begin{itemize}
-    \item Non sovrapposizione: gli elementi posizionati su uno stesso foglio non devono sovrapporsi;
-    \item Margini di punzonatura: i margini di punzonatura assegnati devono essere rispettati su tutti i lati di ogni elemento;
-    \item Margini di sicurezza o taglio comune: se gli elementi adiacenti non condividono un bordo (taglio comune, sovrapposizione del margine), devono rispettare il margine di sicurezza;
-    \item Vincoli sulle assegnazioni: gli elementi obbligatori devono necessariamente essere posizionati tutti, mentre quelli opzionali sono utilizzati, anche solo in parte, solo per ridurre gli scarti;
-    \item Vincoli di hard precedence: gli elementi con precedenza hard più alta devono essere posizionati prima di quelli con precedenza più bassa, se presenti (precedenza che non può essere infranta);
-    \item Vinvoli di soft precedence: se due elementi hanno una relazione di precedenza soft, questa va rispettata solo se non comporta un aumento degli scarti (precedenza che può essere infranta);
-    \item Rotazioni consentite: ciascun elemento può essere ruotato solo secondo le angolazioni permesse dagli strumenti di punzonatura.
-\end{itemize}
+%[preso da chiara]
 
+\subsection{Nesting}
+
+Il Nesting è una forma particolare del CSP a due dimenzioni, solitamente riguarda le forme irregolari. In questa tesi ci concentriamo su forme regolari dato che nel caso Salvagnini facciamo riferimento alle macchine con taglio a punzonatura descritte in precedenza. 
+
+Nel contesto dell’ottimizzazione del Nesting, occorre considerare una serie di vincoli che condizionano la disposizione degli elementi su un foglio. Alcuni di questi vincoli sono standard per questa tipologia di problema, mentre altri risultano specifici del caso Salvagnini. 
+
+Naturalmente gli oggetti che vengono posizionati su uno stesso foglio non devono occupare aree comuni, garantendo così che ciascun elemento abbia il proprio spazio assegnato senza interferenze. Inoltre, ogni elemento deve mantenere una distanza minima dai bordi definiti del foglio, così come tra gli altri elementi, assicurando che vi sia sufficiente spazio per le operazioni di punzonatura senza compromettere la qualità del taglio o della lavorazione. Si aggiungono poi i margini di sicurezza, o margini per il taglio comune, che si applicano quando due elementi adiacenti non condividono un bordo. In tali situazioni, è essenziale rispettare una distanza di sicurezza che garantisca la corretta separazione dei pezzi durante la lavorazione, evitando sovrapposizioni o interferenze tra le traiettorie di taglio.
+
+Dal punto di vista delle assegnazioni, vi sono due categorie di elementi: quelli obbligatori e quelli opzionali. Gli elementi obbligatori devono necessariamente essere collocati sul foglio, senza eccezioni. Gli elementi opzionali, invece, vengono utilizzati in funzione della riduzione degli scarti. Pertanto, questi ultimi possono non essere posizionati o possono essere posizionati solo alcuni, a seconda delle esigenze specifiche.
+
+Un ulteriore vincolo importante riguarda le precedenze. In particolare, si distinguono due tipi di precedenza: hard e soft. Le precedenze hard stabiliscono che gli elementi con una priorità più alta devono essere posizionati prima di quelli con priorità più bassa. Questo ordine è rigido e non può essere infranto. Al contrario, le precedenze soft permettono una maggiore flessibilità: esse vanno rispettate solo qualora non comportino un aumento degli scarti. In caso contrario, possono essere infrante per ottimizzare l’utilizzo del materiale.
+
+Infine, è necessario considerare le rotazioni consentite. Ogni elemento può essere ruotato per adattarsi meglio al layout, ma solo entro gli angoli permessi dagli strumenti di punzonatura (0°, 90°, 180° e 270°). Questo vincolo garantisce che le operazioni di lavorazione possano essere eseguite senza problemi e rispettando le specifiche tecniche degli strumenti.
+
+Questi vincoli, considerati nel loro insieme, rappresentano un complesso sistema di regole che deve essere gestito attentamente per ottimizzare l’utilizzo del materiale e minimizzare gli scarti, garantendo al contempo che le specifiche di lavorazione vengano rispettate.
 
 \section{Vincoli temporali e tecnologici}
+
 L'unico vincolo tecnologico che mi è stato imposto è stato lo sviluppo dell'algoritmo tramite il linguaggio Python. Questo perché python rendere il processo di sviluppo più efficiente, infatti, è particolarmente adatto al fast prototyping, dato che non necessita di compilazione, a differenza di linguaggi come C++ e Java, e, inoltre, permette di avere maggiore flessibilità del codice grazie anche dall'uso dei notebook.
 
 Prima di iniziare lo stage è stato concordato con l’azienda un piano di lavoro su un totale di 304 ore, lavorando 5 giorni a settimana, 8 ore per ciascun giorno eccetto il venerdì che per politica aziendale prevede 6,5 ore. 
 
 \section{Obiettivi}
+
 Ogni obiettivo è provvisto di un codice identificativo formato da una delle seguenti stringhe \textbf{OB}, \textbf{DE} e \textbf{FA}, che rappresentano il livello di importanza e da un numero incrementale positivo, che rispetta la seguente nomenclatura:
 \begin{center}
     [Importanza][Identificativo]
@@ -107,6 +115,7 @@ Divisione delle attività da svolgere con una stima in termini di ore della dura
 \end{table}
 
 \section{Ambiente di lavoro}
+
 Di seguito verranno esposti brevemente il ciclo di vita e la gestione del progetto, considerando anche l'ambiente di sviluppo.
 %python, vscode, github, github desktop, jupyter notebook, librerie python
 \subsection{Metodo di sviluppo}
@@ -119,9 +128,11 @@ Il ciclo di vita dell'algoritmo he seguito i seguenti passi:
 \end{itemize}
 
 \subsection{Gestione di progetto}
+
 Per quanto riguarda la gestione di progetto sono stati utilizzati alcuni strumenti descritti con maggiore dettaglio nel Capitolo 5. In generale per la gestione della comunicazione, condivisione di informazioni, documentazione e articoli si è fatto uso dell’applicazione Microsoft Teams, per il versionamento e la gestione dei task si è fatto uso del servizio GitHub, infine per quanto riguarda l’interfaccia con cui versionare ho utilizzato GitHub Desktop.
 
 \subsection{Linguaggio di programmazione e ambiente di sviluppo}
+
 Per la fase iniziale della codifica si è lavorato utilizzando Jupyter notebook oppure, con il quale è stato possibile scrivere metodi in linguaggio Python in modo molto agevole. Quando l'algoritmo ha raggiunto una certa completezza è stato necessario raggruppare i vari metodi in più classi e iniziare a lavorare su VS Code all'algoritmo e su Jupyter Notebook ai test da effettuare.
 Python è un linguaggio di programmazione orientato agli oggetti ed interpretato dinamicamente al momento dell’esecuzione da un interprete. Python risulta veramente versatile in quanto fornisce incredibili funzionalità utilizzabili in modo semplice e intuitivo, inoltre, dispone di moltissime librerie che permettono le più svariate operazioni, come: metodi per l'analisi statistica, la manipolazione dei dati, la creazione di grafici e operazioni sui file.
 
