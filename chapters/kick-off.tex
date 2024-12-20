@@ -31,13 +31,16 @@ La scelta di utilizzare una metaeuristica per il nostro problema è dovuta alla 
 Le metaeuristiche sono tecniche di ottimizzazione che cercano di risolvere problemi complessi (spesso NP-hard) in modo approssimato, trovando soluzioni soddisfacenti anche quando metodi tradizionali come la programmazione matematica non sono applicabili a causa della difficoltà computazionale. Presentano diversi criteri, ognuno dei quali evidenzia le caratteristiche e le differenze tra le varie strategie di ottimizzazione:
 \begin{itemize}
     \item Deterministici vs stocastici
-
-    Deterministici: prendono decisioni completamente determinate (es.: ricerca locale, ricerca tabu). Utilizzando la stessa soluzione iniziale, il risultato finale sarà sempre lo stesso. \\
-    Stocastici: introducono elementi di casualità (es.: simulated annealing, algoritmi evolutivi). La stessa soluzione iniziale può portare a risultati finali diversi. 
+    \begin{itemize}
+        \item Deterministici: prendono decisioni completamente determinate (es.: ricerca locale, ricerca tabu). Utilizzando la stessa soluzione iniziale, il risultato finale sarà sempre lo stesso;
+        \item Stocastici: introducono elementi di casualità (es.: simulated annealing, algoritmi evolutivi). La stessa soluzione iniziale può portare a risultati finali diversi.
+    \end{itemize}
+     
     \item Diversificazione vs intensificazione
-    
-    Diversificazione: si concentra sull'analisi di regioni inesplorate dello spazio di ricerca, per scoprire nuove aree potenzialmente promettenti.\\
-    Intensificazione: si concentra sull'analisi approfondita delle regioni promettenti individuate tramite soluzioni accettabili, con l'obiettivo di trovare soluzioni migliori.
+    \begin{itemize}
+        \item Diversificazione: si concentra sull'analisi di regioni inesplorate dello spazio di ricerca, per scoprire nuove aree potenzialmente promettenti;
+        \item Intensificazione: si concentra sull'analisi approfondita delle regioni promettenti individuate tramite soluzioni accettabili, con l'obiettivo di trovare soluzioni migliori.
+    \end{itemize}
 \end{itemize}
 
 Le metaeuristiche vengono quindi classificate in due categorie principali: single solution-based e population-based. In generale, le metaeuristiche single solution-based sono orientate all'intensificazione mentre quelle population-based sono orientate alla diversificazione.
