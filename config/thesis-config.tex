@@ -262,3 +262,10 @@
         \caption{#1}
     \end{table}
 }
+
+
+% Abilita la numerazione fino al livello di subsubsection
+\setcounter{secnumdepth}{4}
+
+% Definisci il formato della numerazione per la subsubsection
+\renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}

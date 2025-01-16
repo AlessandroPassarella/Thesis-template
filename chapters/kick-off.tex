@@ -32,14 +32,14 @@ Le metaeuristiche sono tecniche di ottimizzazione che cercano di risolvere probl
 \begin{itemize}
     \item Deterministici vs stocastici
     \begin{itemize}
-        \item Deterministici: prendono decisioni completamente determinate (es.: ricerca locale, ricerca tabu). Utilizzando la stessa soluzione iniziale, il risultato finale sarà sempre lo stesso;
-        \item Stocastici: introducono elementi di casualità (es.: simulated annealing, algoritmi evolutivi). La stessa soluzione iniziale può portare a risultati finali diversi.
+        \item \textbf{Deterministici}: prendono decisioni completamente determinate (es.: ricerca locale, ricerca tabu). Utilizzando la stessa soluzione iniziale, il risultato finale sarà sempre lo stesso;
+        \item \textbf{Stocastici}: introducono elementi di casualità (es.: simulated annealing, algoritmi evolutivi). La stessa soluzione iniziale può portare a risultati finali diversi.
     \end{itemize}
      
     \item Diversificazione vs intensificazione
     \begin{itemize}
-        \item Diversificazione: si concentra sull'analisi di regioni inesplorate dello spazio di ricerca, per scoprire nuove aree potenzialmente promettenti;
-        \item Intensificazione: si concentra sull'analisi approfondita delle regioni promettenti individuate tramite soluzioni accettabili, con l'obiettivo di trovare soluzioni migliori.
+        \item \textbf{Diversificazione}: si concentra sull'analisi di regioni inesplorate dello spazio di ricerca, per scoprire nuove aree potenzialmente promettenti;
+        \item \textbf{Intensificazione}: si concentra sull'analisi approfondita delle regioni promettenti individuate tramite soluzioni accettabili, con l'obiettivo di trovare soluzioni migliori.
     \end{itemize}
 \end{itemize}
 
@@ -50,8 +50,8 @@ Vediamo le differenze in dettaglio.
 
 Le metaeuristiche single solution-based (o migliorative) operano partendo da una soluzione iniziale e cercando di migliorarla attraverso un processo iterativo. Ogni iterazione esplora il vicino della soluzione attuale, cercando di ottenere una soluzione migliore. Non vengono mai generate più soluzioni contemporaneamente, ma si cerca sempre di migliorare quella attuale. Le caratteristiche principali sono:
 \begin{itemize}
-    \item Soluzione unica: si lavora su una singola soluzione alla volta, cercando di modificarla attraverso diverse operazioni;
-    \item Evoluzione locale: il processo di miglioramento della soluzione è locale, cioè si esplorano soluzioni vicine a quella attuale, dette vicinato.
+    \item \textbf{Soluzione unica}: si lavora su una singola soluzione alla volta, cercando di modificarla attraverso diverse operazioni;
+    \item \textbf{Evoluzione locale}: il processo di miglioramento della soluzione è locale, cioè si esplorano soluzioni vicine a quella attuale, dette vicinato.
 \end{itemize}
 
 Il scelta di un buon vicinato è uno degli aspetti fondamentali per le performance di un algoritmo migliorativo sia in termini di efficacia che di efficienza, come afferma Talbi, «Nel progettare una metaeuristica migliorativa, si incontra spesso un compromesso tra la dimensione (o diametro) e la qualità del vicinato da utilizzare e la complessità computazionale necessaria per esplorarlo. Progettare vicinati di grandi dimensioni può migliorare la qualità delle soluzioni ottenute, poiché vengono considerati più vicini a ogni iterazione (Figura 3.1) [...]. Tuttavia, ciò richiede un tempo computazionale aggiuntivo per generare e valutare un vicinato ampio».\footcite{talbi:ssb}
@@ -63,8 +63,8 @@ Il scelta di un buon vicinato è uno degli aspetti fondamentali per le performan
 
 Anche con la di un vicinato adeguato, occorre tenere in considerazione due possibili criticità:
 \begin{itemize}
-    \item Rischio di ottimizzazione locale: poiché esplorano solo soluzioni vicine a quella attuale, c'è il rischio di rimanere bloccati in un minimo locale (local optima) senza riuscire a trovare la soluzione globale ottima (global optima) (Figura 3.2);
-    \item Esplorazione limitata: spesso non sono in grado di esplorare efficacemente spazi di soluzioni vasti o complessi.
+    \item \textbf{Rischio di ottimizzazione locale}: poiché esplorano solo soluzioni vicine a quella attuale, c'è il rischio di rimanere bloccati in un minimo locale (local optima) senza riuscire a trovare la soluzione globale ottima (global optima) (Figura 3.2);
+    \item \textbf{Esplorazione limitata}: spesso non sono in grado di esplorare efficacemente spazi di soluzioni vasti o complessi.
 \end{itemize}
 
 \begin{figure}[!ht] 
@@ -78,8 +78,8 @@ Anche con la di un vicinato adeguato, occorre tenere in considerazione due possi
 Le metaeuristiche population-based possono essere viste come un miglioramento iterativo di una popolazione di soluzioni. In primo luogo, la popolazione viene inizializzata. Successivamente, viene generata una nuova popolazione di soluzioni. Infine, questa nuova popolazione viene integrata in quella attuale utilizzando alcune procedure di selezione (Figura 3.3). Il processo di ricerca si interrompe quando viene soddisfatta una determinata condizione (criterio di arresto). %[talbi pagina 190] 
 Le caratteristiche principali sono:
 \begin{itemize}
-    \item Soluzioni multiple: l'algoritmo opera su una popolazione di soluzioni che vengono evolute nel tempo;
-    \item Evoluzione globale: la popolazione viene aggiornata in modo che le soluzioni migliori vengano selezionate per creare nuove soluzioni, combinando diversità e convergenza.
+    \item \textbf{Soluzioni multiple}: l'algoritmo opera su una popolazione di soluzioni che vengono evolute nel tempo;
+    \item \textbf{Evoluzione globale}: la popolazione viene aggiornata in modo che le soluzioni migliori vengano selezionate per creare nuove soluzioni, combinando diversità e convergenza.
 \end{itemize}
 
 \begin{figure}[!ht] 

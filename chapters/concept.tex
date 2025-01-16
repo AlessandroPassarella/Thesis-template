@@ -36,7 +36,7 @@ Il problema descritto in seguito riguarda il nesting di forme regolari con tecno
 
 \subsection*{1. Input}
 
-\paragraph{Dati sui fogli}  
+\paragraph*{Dati sui fogli}  
 \begin{itemize}
     \item \( T \): insieme dei tipi di fogli disponibili, dove ogni foglio \( t \in T \) è definito da:
     \begin{itemize}
@@ -48,7 +48,7 @@ Il problema descritto in seguito riguarda il nesting di forme regolari con tecno
     \end{itemize}
 \end{itemize}
 
-\paragraph{Dati sugli elementi obbligatori}  
+\paragraph*{Dati sugli elementi obbligatori}  
 \begin{itemize}
     \item \( E_O \): insieme degli elementi obbligatori, dove ogni elemento \( i \in E_O \) è definito da:
     \begin{itemize}
@@ -62,7 +62,7 @@ Il problema descritto in seguito riguarda il nesting di forme regolari con tecno
     \end{itemize}
 \end{itemize}
 
-\paragraph{Dati sugli elementi opzionali}  
+\paragraph*{Dati sugli elementi opzionali}  
 \begin{itemize}
     \item \( E_P \): insieme degli elementi opzionali, dove ogni elemento \( j \in E_P \) è definito da:
     \begin{itemize}
@@ -94,51 +94,51 @@ La soluzione è definita come una sequenza di layout di taglio, che specifica:
 
 \subsection*{4. Vincoli Rigidi}
 
-\paragraph{1. Quantità massima dei tipi di foglio:}
+\paragraph*{1. Quantità massima dei tipi di foglio:}
 \[
 \sum_{t \in T} u_{i,t} \leq q_t, \quad \forall i \in E_O \cup E_P
 \]
 
-\paragraph{2. Non sovrapposizione:}
+\paragraph*{2. Non sovrapposizione:}
 Per ogni coppia di elementi \( i, j \) sullo stesso foglio \( t \):
 \[
 (x_{i,t} + w_i \leq x_{j,t}) \lor (x_{j,t} + w_j \leq x_{i,t}) \lor (y_{i,t} + h_i \leq y_{j,t}) \lor (y_{j,t} + h_j \leq y_{i,t})
 \]
 
-\paragraph{3. Margini di punzonatura:}
+\paragraph*{3. Margini di punzonatura:}
 \[
 x_{i,t} \geq p_i, \quad y_{i,t} \geq p_i, \quad x_{i,t} + w_i \leq w_t - p_i, \quad y_{i,t} + h_i \leq h_t - p_i
 \]
 
-\paragraph{4. Margini di sicurezza o taglio comune:}
+\paragraph*{4. Margini di sicurezza o taglio comune:}
 Per ogni coppia di elementi \( i, j \) non adiacenti:
 \[
 \text{Distanza}(i,j) \geq m_t
 \]
 
-\paragraph{5. Assegnazione degli elementi obbligatori:}
+\paragraph*{5. Assegnazione degli elementi obbligatori:}
 \[
 \sum_{t \in T} u_{i,t} = 1, \quad \forall i \in E_O
 \]
 
-\paragraph{6. Precedenze hard:}
+\paragraph*{6. Precedenze hard:}
 \[
 \text{priority}_i > \text{priority}_j \implies x_{i,t} + y_{i,t} < x_{j,t} + y_{j,t}, \quad \forall i,j \in E_O
 \]
 
-\paragraph{7. Rotazioni consentite:}
+\paragraph*{7. Rotazioni consentite:}
 \[
 r_{i,t} \in R_i, \quad \forall i \in E_O \cup E_P
 \]
 
-\paragraph{8. Zone proibite e obbligatorie:}
+\paragraph*{8. Zone proibite e obbligatorie:}
 \[
 (x_{i,t}, y_{i,t}) \in Z_{m,i}, \quad (x_{i,t}, y_{i,t}) \not\in Z_{p,i}
 \]
 
 \subsection*{5. Vincoli Flessibili}
 
-\paragraph{Precedenze soft:}
+\paragraph*{Precedenze soft:}
 \[
 \text{priority}_i > \text{priority}_j \implies x_{i,t} + y_{i,t} < x_{j,t} + y_{j,t}, \quad \text{se } s_t \text{ rimane costante.}
 \]
