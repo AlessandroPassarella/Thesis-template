@@ -1,2 +1,60 @@
-\chapter{Verifica e validazione}
+\chapter{Test computazionali}
 \label{cap:verifica-validazione}
+
+\section{Introduzione}
+La funzione \texttt{c\_test} esegue una serie di esperimenti per valutare le performance di un algoritmo genetico (GA) applicato a un problema di \emph{nesting} o \emph{packing}. Il test utilizza file di input che descrivono i formati dei fogli e le parti da posizionare, calcolando soluzioni ottimali e confrontandole con quelle fornite dall'azienda.
+
+\section{Descrizione della Funzione}
+
+\subsection{Parametri}
+\begin{itemize}
+    \item \texttt{test\_path}: percorso della directory contenente i dati di test (cartelle con \texttt{output} e file di istanze).
+    \item \texttt{conf}: configurazione dell'algoritmo genetico (ad esempio, parametri di evoluzione).
+    \item \texttt{x}: parametro aggiuntivo passato al costruttore dell'algoritmo genetico (specifico per il GA).
+\end{itemize}
+
+\subsection{Ciclo sui File di Output}
+Per ogni directory presente in \texttt{test\_path}, viene considerata una directory di \texttt{output} che rappresenta un insieme di istanze. All'interno di ciascuna directory di \texttt{output}, vengono letti i file con estensione \texttt{.pcnt} (che rappresentano i dati dell'istanza da elaborare).
+
+\subsection{Preparazione dei Dati dell'Istanze}
+\begin{enumerate}
+    \item La funzione \texttt{RetriveInstanceData} legge i dati relativi ai formati (\texttt{formats}), alle parti (\texttt{parts}) e alle soluzioni aziendali (\texttt{company\_sol}) dal file di istanza.
+    \item Viene selezionato casualmente un tipo di foglio (\texttt{type\_t}) tra quelli disponibili e creato un oggetto \texttt{Sheet} corrispondente.
+    \item Le parti vengono trasformate in liste di oggetti:
+    \begin{itemize}
+        \item \textbf{\texttt{items}}: oggetti obbligatori generati in base alla quantità specificata.
+        \item \textbf{\texttt{optionals}}: oggetti opzionali generati in base alla quantità in eccesso.
+    \end{itemize}
+\end{enumerate}
+
+\subsection{Esecuzione dell'Algoritmo Genetico}
+\begin{itemize}
+    \item L'algoritmo genetico (\texttt{GA}) viene inizializzato con i dati preparati.
+    \item La funzione \texttt{evolve} avvia il processo evolutivo per trovare la soluzione ottimale.
+    \item La migliore soluzione trovata viene estratta e trasformata in una soluzione concreta di \emph{nesting} con il metodo \texttt{nest\_solution}.
+\end{itemize}
+
+\subsection{Misurazione delle Performance}
+\begin{itemize}
+    \item Il tempo di esecuzione (\texttt{ex\_time}) viene calcolato come la differenza tra l'inizio e la fine del processo evolutivo.
+    \item I risultati dell'esperimento includono:
+    \begin{itemize}
+        \item Un identificativo unico per l'istanza (\texttt{id\_}).
+        \item Il parametro \texttt{is\_precedence\_hard} (indica se i vincoli di precedenza sono rigidi).
+        \item Lo scarto della soluzione generata (\texttt{sol.scrap}) e quello della soluzione aziendale (\texttt{company\_sol.scrap}).
+        \item Il tempo di esecuzione (\texttt{ex\_time}).
+    \end{itemize}
+\end{itemize}
+
+\subsection{Output dei Risultati}
+I risultati vengono salvati in un file CSV (\texttt{output\_<configuration\_name>\_TL\_AD.csv}), con una riga per ciascun esperimento. La riga è formattata come segue:
+\[
+\texttt{id\_\textbackslash{}t<is\_precedence\_hard>\textbackslash{}t<sol.scrap>\textbackslash{}t<company\_sol.scrap>\textbackslash{}t<ex\_time>}
+\]
+
+\section{Obiettivi del Test}
+\begin{enumerate}
+    \item \textbf{Confronto delle Soluzioni}: valutare la qualità dello scarto generato dall'algoritmo rispetto alle soluzioni aziendali.
+    \item \textbf{Misura delle Performance Temporali}: analizzare i tempi di esecuzione dell'algoritmo per diverse configurazioni e istanze.
+    \item \textbf{Validazione su Più Istanze}: garantire che l'algoritmo si comporti in modo efficace su un'ampia gamma di casi, coperti da diverse directory di \texttt{output} e file \texttt{.pcnt}.
+\end{enumerate}
