@@ -476,6 +476,27 @@ La fitness di un cromosoma è calcolata come segue:
     \]
 \end{enumerate}
 
+\subsubsection*{Placement}
+
+Le funzioni \emph{PlacementHeuristicEPs\_with\_pilot\_method} e \emph{PlacementHeuristicEPs} rappresentano due varianti di algoritmi di posizionamento di oggetti su un foglio, utilizzando il concetto di punti estremi (\emph{Extreme Points}, EPs). Entrambi gli algoritmi cercano di ottimizzare la disposizione degli oggetti rispettando vincoli di precedenza, aree disponibili e criteri di valutazione. La principale differenza tra i due è l'uso del criterio di valutazione \emph{PILOT\_METHOD} nella prima funzione per risolvere situazioni di parità nella disposizione di un oggetto. Di seguito, una descrizione dettagliata del loro funzionamento.
+
+Ogni oggetto è testato in tutte le sue rotazioni ammesse. Per ciascuna rotazione:
+\begin{itemize}
+    \item Si recuperano i punti estremi disponibili e si valutano, in base a:
+    \begin{itemize}
+        \item \textbf{Verifica geometrica}: Controlla se l'oggetto non esce dai limiti del foglio.
+        \item \textbf{Non sovrapposizione}: Verifica che l'oggetto non si sovrapponga ad altri.
+        \item \textbf{Margini di sicurezza}: Assicura che ci sia un margine di sicurezza tra l'oggetto e i bordi o altri oggetti.
+        \item \textbf{Valutazione}: Calcola un punteggio per la combinazione (punto estremo, rotazione).
+    \end{itemize}
+    \item \textbf{Risoluzione delle parità}:
+    \begin{itemize}
+        \item \emph{PlacementHeuristicEPs\_with\_pilot\_method}: Se più combinazioni (EP e rotazioni) hanno lo stesso punteggio migliore, viene applicato il \emph{PILOT\_METHOD}, che simula l'aggiunta temporanea di ogni oggetto (fino a riempire il foglio) e valuta l'area di scarto. Successivamente viene scelta la configurazione con il minimo scarto.
+        \item \emph{PlacementHeuristicEPs}: Invece di usare il \emph{PILOT\_METHOD}, la funzione sceglie direttamente la configurazione con il punteggio migliore. Se esistono più configurazioni con lo stesso punteggio, viene scelta la prima incontrata.
+    \end{itemize}
+    \item L'oggetto viene posizionato nel miglior punto estremo trovato.
+\end{itemize}
+
 \subsubsection*{Nest della soluzione finale}
 
 Grazie alla funzione \emph{get\_best\_solution} viene estratto il cromosoma con la fitness migliore al termine del processo evolutivo. Successivamente, la funzione \emph{nest\_solution} fornisce la soluzione finale, ottimizzata e pronta per essere applicata:
@@ -486,9 +507,13 @@ Grazie alla funzione \emph{get\_best\_solution} viene estratto il cromosoma con 
     \item La soluzione finale è rappresentata come un oggetto \emph{Nest}, che include i fogli usati, le parti posizionate e la loro disposizione.
 \end{itemize}
 
+la seguente immagine (Figura 5.7) mostra il grafico di una soluzione a cui è applicata la funzione \emph{nest\_solution}.
 
-
-
+\begin{figure}[!ht] 
+    \centering 
+    \includegraphics[width=1\columnwidth]{tesi/output} 
+    \caption{Esempio nest di una soluzione}
+\end{figure}
 
 
 
