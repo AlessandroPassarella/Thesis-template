@@ -9,26 +9,27 @@ Di seguito verranno descritti alcuni approcci per la risoluzione del problema di
 
 \subsection{Approcci esatti}
 
-Gli approcci esatti come la programmazione lineare intera mista (MILP) o i metodi di branch-and-bound hanno un costo computazionale elevato il che li rende difficilmente applicabili in contesti reali, dove spesso sono presenti un maggiore numero di vincoli specifici e le istanze possono essere di grandi dimensioni. La rappresentazione matematica diventa complessa quando si considerano problemi pratici che possiedono vincoli specifici.
-Gilmore e Gomory (1961) hanno introdotto approcci lineari per il CSP\footcite{gilmore:linear-programming}.
+Gli approcci esatti come la \emph{programmazione lineare intera mista}\glsfirstoccur (MILP) o i metodi di \emph{branch-and-bound}\glsfirstoccur hanno un costo computazionale elevato il che li rende difficilmente applicabili in contesti reali, dove spesso sono presenti un maggiore numero di vincoli specifici e le istanze possono essere di grandi dimensioni. La rappresentazione matematica diventa complessa quando si considerano problemi pratici che possiedono vincoli specifici.
+% Gilmore e Gomory (1961) hanno introdotto approcci lineari per il CSP\footcite{gilmore:linear-programming}.
 
-\subsection{Approcci euristici e metaeuristici}
+\subsection{Approcci euristici e metaeuristici} \hypertarget{metaeuristiche}{}
 
-A differenza dei metodi esatti, le metaeuristiche consentono di affrontare istanze di problemi di grandi dimensioni fornendo soluzioni soddisfacenti in un tempo ragionevole, come afferma Talbi, «Gli algoritmi metaeuristici cercano buone soluzioni a problemi di ottimizzazione in circostanze in cui la complessità del problema affrontato o il tempo di ricerca disponibile non consentono l'uso di algoritmi di ottimizzazione esatti».\footcite{talbi:metaheuristics}
+A differenza dei metodi esatti, le \emph{metaeuristiche}\glsfirstoccur consentono di affrontare istanze di problemi di grandi dimensioni fornendo soluzioni soddisfacenti in un tempo ragionevole. Gli algoritmi metaeuristici cercano buone soluzioni a problemi di ottimizzazione in circostanze in cui la complessità del problema affrontato o il tempo di ricerca disponibile non consentono l'uso di algoritmi di ottimizzazione esatti[\hyperlink{bibliografia}{1}].
+% \footcite{talbi:metaheuristics}.
 
 Gli algoritmi genetici (GA) che sono particolarmente efficaci per problemi combinatori complessi grazie alla capacità di esplorare grandi spazi di ricerca. I GA si sono dimostrati utili per il Nesting bidimensionale, permettendo l'evoluzione di soluzioni attraverso gli operatori di crossover e mutazione.
 
-Jakobs (1996) ha introdotto uno dei primi GA per il problema di Nesting bidimensionale\footcite{jakobs:nesting}.
+% Jakobs (1996) ha introdotto uno dei primi GA per il problema di Nesting bidimensionale\footcite{jakobs:nesting}.
 
 \subsection{Approcci ibridi}
 
-Combinazioni di metaeuristiche e metodi esatti (ad esempio, utilizzo di euristiche per generare soluzioni iniziali per MILP) si dimostrano metodi risolutivi molto efficaci. L'uso di strategie ibride permette di bilanciare efficacia computazionale e qualità delle soluzioni, da un lato metodi euristici possono fornire informazioni utili ai metodi basati su programmazione lineare (es: soluzioni iniziali, upper bound). dall'altro lato metodi esatti possono essere inclusi in euristiche e metaeuristiche per risolvere sottoproblemi relativi a sottinsiemi di variabili. 
+Combinazioni di metaeuristiche e metodi esatti (ad esempio, utilizzo di \emph{euristiche}\glsfirstoccur per generare soluzioni iniziali per MILP) si dimostrano metodi risolutivi molto efficaci. L'uso di strategie ibride permette di bilanciare efficacia computazionale e qualità delle soluzioni, da un lato metodi euristici possono fornire informazioni utili ai metodi basati su programmazione lineare (es: soluzioni iniziali). dall'altro lato metodi esatti possono essere inclusi in euristiche e metaeuristiche per risolvere sottoproblemi relativi a sottinsiemi di variabili. 
 
 \section{Metaeuristiche}
 
 La scelta di utilizzare una metaeuristica per il nostro problema è dovuta alla necessità di gestire vincoli pratici specifici per il caso Salvagnini, inoltre le metaeuristiche si prestano particolarmente alla massimizzazione dell'efficacia in tempi accettabili.
 
-Le metaeuristiche sono tecniche di ottimizzazione che cercano di risolvere problemi complessi (spesso NP-hard) in modo approssimato, trovando soluzioni soddisfacenti anche quando metodi tradizionali come la programmazione matematica non sono applicabili a causa della difficoltà computazionale. Presentano diversi criteri, ognuno dei quali evidenzia le caratteristiche e le differenze tra le varie strategie di ottimizzazione:
+Le metaeuristiche sono tecniche di ottimizzazione che cercano di risolvere problemi complessi (spesso \emph{NP-hard}\glsfirstoccur) in modo approssimato, trovando soluzioni soddisfacenti anche quando metodi tradizionali come la programmazione matematica non sono applicabili a causa della difficoltà computazionale. Presentano diversi criteri, ognuno dei quali evidenzia le caratteristiche e le differenze tra le varie strategie di ottimizzazione:
 \begin{itemize}
     \item Deterministici vs stocastici
     \begin{itemize}
@@ -43,10 +44,10 @@ Le metaeuristiche sono tecniche di ottimizzazione che cercano di risolvere probl
     \end{itemize}
 \end{itemize}
 
-Le metaeuristiche vengono quindi classificate in due categorie principali: single solution-based e population-based. In generale, le metaeuristiche single solution-based sono orientate all'intensificazione mentre quelle population-based sono orientate alla diversificazione.
+Le metaeuristiche vengono quindi classificate in due categorie principali: \emph{single solution-based} e \emph{population-based}. In generale, le metaeuristiche single solution-based sono orientate all'intensificazione mentre quelle population-based sono orientate alla diversificazione.
 Vediamo le differenze in dettaglio.
 
-\subsection{Single Solution-Based}
+\subsection{Single Solution-Based} \hypertarget{ssb}{}
 
 Le metaeuristiche single solution-based (o migliorative) operano partendo da una soluzione iniziale e cercando di migliorarla attraverso un processo iterativo. Ogni iterazione esplora il vicino della soluzione attuale, cercando di ottenere una soluzione migliore. Non vengono mai generate più soluzioni contemporaneamente, ma si cerca sempre di migliorare quella attuale. Le caratteristiche principali sono:
 \begin{itemize}
@@ -54,7 +55,7 @@ Le metaeuristiche single solution-based (o migliorative) operano partendo da una
     \item \textbf{Evoluzione locale}: il processo di miglioramento della soluzione è locale, cioè si esplorano soluzioni vicine a quella attuale, dette vicinato.
 \end{itemize}
 
-Il scelta di un buon vicinato è uno degli aspetti fondamentali per le performance di un algoritmo migliorativo sia in termini di efficacia che di efficienza, come afferma Talbi, «Nel progettare una metaeuristica migliorativa, si incontra spesso un compromesso tra la dimensione (o diametro) e la qualità del vicinato da utilizzare e la complessità computazionale necessaria per esplorarlo. Progettare vicinati di grandi dimensioni può migliorare la qualità delle soluzioni ottenute, poiché vengono considerati più vicini a ogni iterazione (Figura 3.1) [...]. Tuttavia, ciò richiede un tempo computazionale aggiuntivo per generare e valutare un vicinato ampio».\footcite{talbi:ssb}
+Il scelta di un buon vicinato è uno degli aspetti fondamentali per le performance di un algoritmo migliorativo sia in termini di efficacia che di efficienza, come afferma Talbi, Nel progettare una metaeuristica migliorativa, si incontra spesso un compromesso tra la dimensione (o diametro) e la qualità del vicinato da utilizzare e la complessità computazionale necessaria per esplorarlo. Progettare vicinati di grandi dimensioni può migliorare la qualità delle soluzioni ottenute, poiché vengono considerati più vicini a ogni iterazione (Figura 3.1). Tuttavia, ciò richiede un tempo computazionale aggiuntivo per generare e valutare un vicinato ampio.
 \begin{figure}[!ht] 
     \centering 
     \includegraphics[width=0.9\columnwidth]{tesi/vicini} 
@@ -64,7 +65,7 @@ Il scelta di un buon vicinato è uno degli aspetti fondamentali per le performan
 Anche con la di un vicinato adeguato, occorre tenere in considerazione due possibili criticità:
 \begin{itemize}
     \item \textbf{Rischio di ottimizzazione locale}: poiché esplorano solo soluzioni vicine a quella attuale, c'è il rischio di rimanere bloccati in un minimo locale (local optima) senza riuscire a trovare la soluzione globale ottima (global optima) (Figura 3.2);
-    \item \textbf{Esplorazione limitata}: spesso non sono in grado di esplorare efficacemente spazi di soluzioni vasti o complessi.
+    \item \textbf{Esplorazione limitata}: spesso non sono in grado di esplorare efficacemente spazi di soluzioni vasti o complessi[\hyperlink{bibliografia}{2}].
 \end{itemize}
 
 \begin{figure}[!ht] 
@@ -73,7 +74,7 @@ Anche con la di un vicinato adeguato, occorre tenere in considerazione due possi
     \caption{Minimi locali e minimi globali in uno spazio di ricerca, possono esserci più minimi globali}
 \end{figure}
 
-\subsection{Population-Based}
+\subsection{Population-Based} \hypertarget{pb}{}
 
 Le metaeuristiche population-based possono essere viste come un miglioramento iterativo di una popolazione di soluzioni. In primo luogo, la popolazione viene inizializzata. Successivamente, viene generata una nuova popolazione di soluzioni. Infine, questa nuova popolazione viene integrata in quella attuale utilizzando alcune procedure di selezione (Figura 3.3). Il processo di ricerca si interrompe quando viene soddisfatta una determinata condizione (criterio di arresto). %[talbi pagina 190] 
 Le caratteristiche principali sono:
@@ -90,7 +91,7 @@ Le caratteristiche principali sono:
 
 Grazie alla combinazione fra soluzioni multiple e evoluzione globale, mantenendo le soluzioni migliori di una data popolazione, le metaeuristiche population-based bilanciano la diversificazione (cercare nuove aree dello spazio delle soluzioni) e l'intensificazione (migliorare le soluzioni trovate). In particolare, la diversificazione aumenta la possibilità di evitare minimi locali, poiché operano su spazi di ricerca vasti, e le soluzioni della popolazione possono convergere verso la soluzione globale grazie all'intensificazione generata dal mantenere le soluzioni migliori iterazione dopo iterazione.
 
-Come vedremmo nel capitolo 6, il punto centrale durante la fase di test dell'algoritmo è la parametrizzazione, infatti, l'ottimizzazione dei parametri della popolazione (come la dimensione della popolazione e i tassi di crossover e mutazione) può essere complessa e richiedere diversi tentativi per evitare il rischio di over-tuning, ovvero adattare i parametri a solo certe istanze con determinate caratteristiche.
+L'ottimizzazione dei parametri della popolazione (come la dimensione della popolazione e i tassi di crossover e mutazione) può essere complessa e richiedere diversi tentativi per evitare il rischio di \emph{over-tuning}\glsfirstoccur, ovvero adattare i parametri a solo certe istanze con determinate caratteristiche[\hyperlink{bibliografia}{3}].
 
 \subsection{Confronto single solution-based e population-based}
 
@@ -103,7 +104,6 @@ Come vedremmo nel capitolo 6, il punto centrale durante la fase di test dell'alg
     Numero di soluzioni esplorate & Una sola soluzione alla volta & Più soluzioni contemporaneamente \\ \hline
     Esplorazione dello spazio di ricerca & Localizzata, vicina alla soluzione attuale, focus su intensidicazione & Maggiore esplorazione e diversificazione \\ \hline
     Rischio di ottimizzazione locale & Più alto, poiché esplora soluzioni vicine & Più basso, grazie alla diversità della popolazione \\ \hline
-    Costo computazionale & Generalmente più efficiente & Più costoso a causa della popolazione di soluzioni \\ \hline
     \end{tabular}
     \caption{Confronto tra metaeuristiche single solution-based e population-based.}
     \label{tab:comparison}
@@ -111,13 +111,13 @@ Come vedremmo nel capitolo 6, il punto centrale durante la fase di test dell'alg
 
 In conclusione le single solution-based si focalizzano su una sola soluzione e migliorano gradualmente questa soluzione attraverso piccole modifiche, tuttavia, rischiano di restare bloccate in ottimi locali. Le population-based lavorano con una popolazione di soluzioni, permettendo una migliore esplorazione dello spazio di ricerca e riducendo il rischio di ottimizzazione locale, ma tendenzialmente con un costo computazionale maggiore (Tabella 3.1).
 
-Scegliamo di sviluppare un algoritmo popilation-based dato si teme che la beam search, essendo una single solution-based, possa bloccarsi in dei minimi locali. Nel seguente paragrafo introduciamo alcuni tipi di metaeuristiche popilation-based per poter scegliere quella più adatta.
+Scegliamo di sviluppare un algoritmo popilation-based dato si teme che la soluzione aziendale, essendo una single solution-based, possa bloccarsi in dei minimi locali. Nel seguente paragrafo introduciamo alcuni tipi di metaeuristiche popilation-based per poter scegliere quella più adatta.
 
-\section{Algoritmi evolutivi}
+\section{Algoritmi evolutivi} \hypertarget{ea}{}
 
 Nel XIX secolo, i principi dell'ereditarietà di J. Mendel e la teoria dell'evoluzione di C. Darwin (1859) hanno gettato le basi per lo sviluppo, negli anni '80 del Novecento, degli algoritmi evolutivi (EA). Questi metodi computazionali traggono ispirazione dai processi evolutivi naturali per risolvere problemi complessi di ottimizzazione. Tra i principali paradigmi sviluppati sono presenti gli algoritmi genetici (Holland), le strategie evolutive (Rechenberg, Schwefel), la programmazione evolutiva (Fogel) e la programmazione genetica (Koza). Sebbene ciascun approccio presenti peculiarità, tutti condividono il principio di evoluzione di una popolazione attraverso iterazioni basate su selezione, riproduzione e variazione.
 
-Gli EA si basano sul concetto di competizione. Rappresentano una classe di algoritmi di ottimizzazione iterativi che simulano l'evoluzione delle specie (Figura 3.4). Si basano sull'evoluzione di una popolazione di individui, solitamente generata in modo casuale, e ogni individuo nella popolazione rappresenta una versione codificata di una soluzione provvisoria. Una funzione obiettivo associa a ogni individuo un valore di fitness che indica la sua idoneità al problema. A ogni passo, vengono selezionati gli individui che formeranno i genitori, seguendo un paradigma di selezione in cui gli individui con un valore di fitness migliore hanno una maggiore probabilità di essere scelti. Successivamente, gli individui selezionati vengono riprodotti utilizzando operatori di variazione (ad esempio, crossover e mutazione) per generare nuovi discendenti. Infine, viene applicato uno schema di sostituzione per determinare quali individui della popolazione sopravvivranno tra i discendenti e i genitori. Questa iterazione rappresenta una generazione (Figura 3.4). Questo processo viene ripetuto fino a quando non si verifica un criterio di arresto. [talbi pagina 199]
+Gli EA si basano sul concetto di competizione. Rappresentano una classe di algoritmi di ottimizzazione iterativi che simulano l'evoluzione delle specie (Figura 3.4). Si basano sull'evoluzione di una popolazione di individui, solitamente generata in modo casuale, e ogni individuo nella popolazione rappresenta una versione codificata di una soluzione provvisoria. Una funzione obiettivo associa a ogni individuo un valore di fitness che indica la sua idoneità al problema. A ogni passo, vengono selezionati gli individui che formeranno i genitori, seguendo un paradigma di selezione in cui gli individui con un valore di fitness migliore hanno una maggiore probabilità di essere scelti. Successivamente, gli individui selezionati vengono riprodotti utilizzando operatori di variazione (ad esempio, crossover e mutazione) per generare nuovi discendenti. Infine, viene applicato uno schema di sostituzione per determinare quali individui della popolazione sopravvivranno tra i discendenti e i genitori. Questa iterazione rappresenta una generazione (Figura 3.4). Questo processo viene ripetuto fino a quando non si verifica un criterio di arresto.
 
 \begin{figure}[!ht] 
     \centering 
@@ -137,7 +137,7 @@ Nelle sezioni seguenti verranno evidenziate le principali differenze tra le vari
 
 \subsection{Algoritmi genetici}
 
-Gli algoritmi genetici (Genetic Algorithms - GA) rappresentano una classe molto popolare di algoritmi evolutivi. Tradizionalmente, i GA sono associati all'uso di una rappresentazione binaria, ma oggi è possibile trovare GA che utilizzano altri tipi di rappresentazioni. Un GA applica solitamente un operatore di crossover a due soluzioni, che svolge un ruolo fondamentale, oltre a un operatore di mutazione che modifica casualmente i contenuti dell'individuo per promuovere la diversificazione delle soluzioni. I GA utilizzano una selezione probabilistica che originariamente è la selezione proporzionale. La sostituzione è generazionale, il che significa che i genitori vengono sistematicamente sostituiti dai discendenti. L'operatore di crossover si basa sul crossover a n punti o uniforme, mentre la mutazione consiste nel flipping di bit. Una probabilità fissa pm (rispettivamente pc) viene applicata all'operatore di mutazione (rispettivamente crossover).
+Gli algoritmi genetici (Genetic Algorithms - GA) rappresentano una classe molto popolare di algoritmi evolutivi. Tradizionalmente, i GA sono associati all'uso di una rappresentazione binaria, ma oggi è possibile trovare GA che utilizzano altri tipi di rappresentazioni. Un GA applica solitamente un operatore di crossover a due soluzioni, che svolge un ruolo fondamentale, oltre a un operatore di mutazione che modifica casualmente i contenuti dell'individuo per promuovere la diversificazione delle soluzioni. I GA utilizzano una selezione probabilistica che originariamente è la selezione proporzionale. La sostituzione è generazionale, il che significa che i genitori vengono sistematicamente sostituiti dai discendenti. L'operatore di crossover si basa sul crossover a n punti o uniforme, mentre la mutazione consiste nel flipping di bit. Una probabilità fissa $p_m$ (rispettivamente $p_c$) viene applicata all'operatore di mutazione (rispettivamente crossover).
 
 \subsection{Strategie evolutive}
 
@@ -159,15 +159,15 @@ La EP è meno utilizzata rispetto alle altre famiglie di algoritmi evolutivi, a 
 
 La programmazione genetica (genetic programming - GP) è un approccio evolutivo più recente la cui principale differenza rispetto alle altre famiglie evolutive è che gli individui evoluti sono essi stessi programmi (rappresentazione non lineare basata su alberi) anziché stringhe di lunghezza fissa provenienti da un alfabeto limitato di simboli (rappresentazione lineare). Questi programmi si evolvono combinandosi, riproducendosi o mutando, per dar luogo ad altri programmi che si adattano meglio a risolvere un determinato problema.
 
-Le GP richiedono una popolazione molto grande (ad esempio, migliaia di individui), rendendole quindi molto costose dal punto di vista computazionale. La teoria della GP è meno sviluppata rispetto alle strategie evolutive e agli algoritmi genetici. Le GP contemporanee sono ampiamente utilizzate in compiti di apprendimento automatico e data mining, come la previsione e la classificazione.
+Le GP richiedono una popolazione molto grande (ad esempio, migliaia di individui), rendendole quindi molto costose dal punto di vista computazionale. La teoria della GP è meno sviluppata rispetto alle strategie evolutive e agli algoritmi genetici. Le GP contemporanee sono ampiamente utilizzate in compiti di apprendimento automatico e data mining, come la previsione e la classificazione[\hyperlink{bibliografia}{4}].
 
 \section{Gap di ricerca}
 
 La letteratura fornisce una base solida per affrontare problemi di Nesting, ma il caso specifico Salvagnini presenta alcune lacune:
 
 \begin{itemize}
-    \item Approcci che integrano vincoli geometrici con vincoli di precedenza sono rari:
-    \item Tecniche specifiche per il taglio comune e margini di punzonatura sono poco esplorate:
+    \item Approcci che integrano vincoli geometrici con vincoli di precedenza sono rari;
+    \item Tecniche specifiche per il taglio comune e margini di punzonatura sono poco esplorate;
     \item L'uso di GA per istanze con vincoli multipli richiede ulteriori adattamenti, come operatori personalizzati.
 \end{itemize}
 

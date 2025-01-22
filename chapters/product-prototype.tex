@@ -33,9 +33,9 @@ I principali componenti di ricerca per progettare un algoritmo evolutivo sono i 
     \item \textbf{Criteri di arresto}: determina la fine del loop evolutivo, solitamente è indicato come il numero di generazioni da raggiungere, ovvero ogni interazione è una generazione.
 \end{itemize}
 
-\subsection{Struttura del genetico}
+\subsection{Struttura del genetico} \hypertarget{ga}{}
 
-In questa sezione descriviamo la struttura dell'Algoritmo Genetico scelta per il controllo delle sue fasi di intensificazione e diversificazione.
+In questa sezione descriviamo la struttura dell'Algoritmo Genetico scelta per il controllo delle sue fasi di intensificazione e diversificazione.[\hyperlink{bibliografia}{5}]
 L'obiettivo è massimizzare una funzione di fitness $f$. I parametri richiesti dall'algoritmo GA sono:
 
 \begin{itemize}
@@ -101,7 +101,7 @@ La strategia di rimpiazzo ha un grande impatto sull'intensificazione. La metodol
     end
 \end{lstlisting}
 
-\subsection{Operatori genetici}
+\subsection{Operatori genetici} \hypertarget{og}{}
 
 Gli operatori genetici permettono agli algoritmi evolutivi di modulare la diversificazione. Operano sui cromosomi alterandone i geni e permettendo di esplorare un ampio spazio di soluzioni senza andare a perdere intensificazione grazie alla selezione e all'elitismo.
 
@@ -159,7 +159,7 @@ Alcuni punti importanti da considerare nella progettazione o nell'uso di un oper
     \item \textbf{Località}: la mutazione dovrebbe produrre un cambiamento minimo. La dimensione della mutazione è importante e dovrebbe essere controllabile. La località è l'effetto sulla soluzione (fenotipo) quando si esegue la modifica (perturbazione) nella rappresentazione (genotipo). Quando vengono effettuati piccoli cambiamenti nel genotipo, il fenotipo deve rivelare piccoli cambiamenti. In questo caso, si dice che la mutazione ha una forte località. Una debole località è caratterizzata da un grande effetto sul fenotipo quando viene effettuato un piccolo cambiamento nel genotipo.
 \end{itemize}
 
-La mutazione in rappresentazioni basate sull'ordine, come nel nostro caso, è generalmente basata sugli operatori di scambio (swapping), inversione o inserimento. 
+La mutazione in rappresentazioni basate sull'ordine, come nel nostro caso, è generalmente basata sugli operatori di scambio (swapping), inversione o inserimento[\hyperlink{bibliografia}{4}]. 
 
 \section{Parametrizzazione}
 
@@ -240,7 +240,7 @@ Questo ha indicato come sicuramente sono presenti soluzioni migliori ottenibili 
     \caption{Andamento valori di fitness di un instanza di prova testata con Conf3}
 \end{figure}
 
-\subsection{Analisi statistica}
+\subsection{Analisi statistica} \hypertarget{ttest}{}
 
 50 istanze di prova diverse generate randomicamente, ciascusa istanza ha:
 \begin{itemize}
@@ -270,7 +270,7 @@ Le seguenti medie sono ottenute sui valori di fitness della soluzione miglire, p
     \end{itemize}
 \end{itemize}
 
-Si può notare che da questi risultati si ottiene una configurazione migliore, tuttavia di tratta solo di risultati basati su determinate istanze. È importante sottolineare che tramite un t-test non sono stati rilevati sufficenti risultati per affermare che a livello statistico una configurazione è migliore di un altra. 
+Si può notare che da questi risultati si ottiene una configurazione migliore, tuttavia di tratta solo di risultati basati su determinate istanze. È importante sottolineare che tramite un \emph{t-test}\glsfirstoccur non sono stati rilevati sufficenti risultati per affermare che a livello statistico una configurazione è migliore di un altra[\hyperlink{bibliografia}{6}]. 
 
 \section{Implementazione}
 

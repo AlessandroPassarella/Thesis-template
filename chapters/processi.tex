@@ -5,7 +5,7 @@
 
 \section{Definizione del problema}
 
-In Ricerca Operativa, il \emph{Cutting Stock Problem} (CSP) rappresenta una classe di problemi di ottimizzazione combinatoria di rilevanza pratica che coinvolge l'assegnazione di oggetti più piccoli a oggetti più grandi, generalmente con l'obiettivo di minimizzare gli scarti. I problemi di CSP possono differire tra loro per una grande varietà di caratteristiche. Ad esempio, le dimensioni sia degli oggetti piccoli che di quelli grandi possono variare da 1 a 3 dimensioni. Il caso bidimensionale riguarda il taglio di oggetti (o parti) da fogli di materiale riducendo gli scarti, come avviene nelle industrie del legno, del vetro e della lamiera.
+In Ricerca Operativa, il \emph{Cutting Stock Problem} (CSP) rappresenta una classe di \emph{problemi di ottimizzazione combinatoria}\glsfirstoccur di rilevanza pratica che coinvolge l'assegnazione di oggetti più piccoli a oggetti più grandi, generalmente con l'obiettivo di minimizzare gli scarti. I problemi di CSP possono differire tra loro per una grande varietà di caratteristiche. Ad esempio, le dimensioni sia degli oggetti piccoli che di quelli grandi possono variare da 1 a 3 dimensioni. Il caso bidimensionale riguarda il taglio di oggetti (o parti) da fogli di materiale riducendo gli scarti, come avviene nelle industrie del legno, del vetro e della lamiera.
 
 \subsection{Contesto}
 
@@ -19,11 +19,11 @@ Il Nesting è una forma particolare del CSP a due dimenzioni, solitamente riguar
 
 Nel contesto dell’ottimizzazione del Nesting, occorre considerare una serie di vincoli che condizionano la disposizione degli elementi su un foglio. Alcuni di questi vincoli sono standard per questa tipologia di problema, mentre altri risultano specifici del caso Salvagnini. 
 
-Naturalmente gli oggetti che vengono posizionati su uno stesso foglio non devono occupare aree comuni, garantendo così che ciascun elemento abbia il proprio spazio assegnato senza interferenze. Inoltre, ogni elemento deve mantenere una distanza minima dai bordi definiti del foglio, così come tra gli altri elementi, assicurando che vi sia sufficiente spazio per le operazioni di punzonatura senza compromettere la qualità del taglio o della lavorazione. Si aggiungono poi i margini di sicurezza, o margini per il taglio comune, che si applicano quando due elementi adiacenti non condividono un bordo. In tali situazioni, è essenziale rispettare una distanza di sicurezza che garantisca la corretta separazione dei pezzi durante la lavorazione, evitando sovrapposizioni o interferenze tra le traiettorie di taglio.
+Naturalmente gli oggetti che vengono posizionati su uno stesso foglio non devono occupare aree comuni, garantendo così che ciascun elemento abbia il proprio spazio assegnato senza interferenze. Inoltre, ogni elemento deve mantenere una distanza minima dai bordi definiti del foglio, così come tra gli altri elementi, assicurando che vi sia sufficiente spazio per le operazioni di punzonatura senza compromettere la qualità del taglio o della lavorazione. Si aggiungono poi i \emph{margini di sicurezza}\glsfirstoccur, o \emph{margini per il taglio comune}\glsfirstoccur, che si applicano quando due elementi adiacenti non condividono un bordo. In tali situazioni, è essenziale rispettare una distanza di sicurezza che garantisca la corretta separazione dei pezzi durante la lavorazione, evitando sovrapposizioni o interferenze tra le traiettorie di taglio.
 
-Dal punto di vista delle assegnazioni, vi sono due categorie di elementi: quelli obbligatori e quelli opzionali. Gli elementi obbligatori devono necessariamente essere collocati sul foglio, senza eccezioni. Gli elementi opzionali, invece, vengono utilizzati in funzione della riduzione degli scarti. Pertanto, questi ultimi possono non essere posizionati o possono essere posizionati solo alcuni, a seconda delle esigenze specifiche.
+Dal punto di vista delle assegnazioni, vi sono due categorie di elementi: quelli obbligatori e quelli opzionali. Gli elementi obbligatori devono necessariamente essere collocati sul foglio, senza eccezioni. Gli elementi opzionali, invece, vengono utilizzati in funzione della riduzione degli \emph{scarti}\glsfirstoccur. Pertanto, questi ultimi possono non essere posizionati o possono essere posizionati solo alcuni, a seconda delle esigenze specifiche.
 
-Un ulteriore vincolo importante riguarda le precedenze. In particolare, si distinguono due tipi di precedenza: hard e soft. Le precedenze hard stabiliscono che gli elementi con una priorità più alta devono essere posizionati prima di quelli con priorità più bassa. Questo ordine è rigido e non può essere infranto. Al contrario, le precedenze soft permettono una maggiore flessibilità: esse vanno rispettate solo qualora non comportino un aumento degli scarti. In caso contrario, possono essere infrante per ottimizzare l’utilizzo del materiale.
+Un ulteriore vincolo importante riguarda le \emph{precedenze}\glsfirstoccur. In particolare, si distinguono due tipi di precedenza: hard e soft. Le precedenze hard stabiliscono che gli elementi con una priorità più alta devono essere posizionati prima di quelli con priorità più bassa. Questo ordine è rigido e non può essere infranto. Al contrario, le precedenze soft permettono una maggiore flessibilità: esse vanno rispettate solo qualora non comportino un aumento degli scarti. In caso contrario, possono essere infrante per ottimizzare l’utilizzo del materiale.
 
 Infine, è necessario considerare le rotazioni consentite. Ogni elemento può essere ruotato per adattarsi meglio al layout, ma solo entro gli angoli permessi dagli strumenti di punzonatura (0°, 90°, 180° e 270°). Questo vincolo garantisce che le operazioni di lavorazione possano essere eseguite senza problemi e rispettando le specifiche tecniche degli strumenti.
 
@@ -31,7 +31,7 @@ Questi vincoli, considerati nel loro insieme, rappresentano un complesso sistema
 
 \section{Vincoli temporali e tecnologici}
 
-L'unico vincolo tecnologico che mi è stato imposto è stato lo sviluppo dell'algoritmo tramite il linguaggio Python. Questo perché python rendere il processo di sviluppo più efficiente, infatti, è particolarmente adatto al fast prototyping, dato che non necessita di compilazione, a differenza di linguaggi come C++ e Java, e, inoltre, permette di avere maggiore flessibilità del codice grazie anche dall'uso dei notebook.
+L'unico vincolo tecnologico che mi è stato imposto è stato lo sviluppo dell'algoritmo tramite il linguaggio \emph{Python}\glsfirstoccur. Questo perché python rendere il processo di sviluppo più efficiente, infatti, è particolarmente adatto al \emph{fast prototyping}\glsfirstoccur, dato che non necessita di compilazione, a differenza di linguaggi come C++ e Java, e, inoltre, permette di avere maggiore flessibilità del codice grazie anche dall'uso dei \emph{notebook}\glsfirstoccur.
 
 Prima di iniziare lo stage è stato concordato con l’azienda un piano di lavoro su un totale di 304 ore, lavorando 5 giorni a settimana, 8 ore per ciascun giorno eccetto il venerdì che per politica aziendale prevede 6,5 ore. 
 
@@ -60,9 +60,9 @@ Ogni obbiettivo è affiancato da una breve descrizione.
 \textbf{Obiettivo} & \textbf{Descrizione} \\ \hline
 OB1 & Studio e conoscenza di algoritmi euristici e metaeuristici nella letteratura della Ricerca Operativa \\ \hline
 OB2 & Definizione del problema di nesting in esame \\ \hline
-OB3 & Conoscenza del framework fornito dall’azienda con funzionalità di natura geometrica e di ottimizzazione nel contesto del nesting \\ \hline
+OB3 & Conoscenza del \emph{framework}\glsfirstoccur fornito dall’azienda con funzionalità di natura geometrica e di ottimizzazione nel contesto del nesting \\ \hline
 OB4 & Implementazione di un algoritmo genetico per la risoluzione del problema di nesting in esame \\ \hline
-OB5 & Verifica su benchmark aziendali dell’algoritmo, confrontandolo con soluzioni ottenute da altri metodi risolutivi interni all’azienda \\ \hline
+OB5 & Verifica su \emph{benchmark}\glsfirstoccur aziendali dell’algoritmo, confrontandolo con soluzioni ottenute da altri metodi risolutivi interni all’azienda \\ \hline
 OB6 & Documentazione del codice e manuale di utilizzo dei moduli sviluppati \\ \hline
 \end{tabular}
 \caption{Obiettivi Obbligatori}
@@ -122,20 +122,20 @@ Il ciclo di vita dell'algoritmo he seguito i seguenti passi:
 \begin{itemize}
     \item Comprensione del problema: definizione del problema di nesting;
     \item Analisi letteratura: lettura articoli accademici di algoritmi genetici;
-    \item Sviluppo: codifica dell'algoritmo e integrazione con il (lavoro di chiara);
+    \item Sviluppo: implementazione dell'algoritmo;
     \item Verifica: testing massivo e verifica della soluzione fornita.
 \end{itemize}
 
 \subsection{Gestione di progetto}
 
-In generale per la gestione della comunicazione, condivisione di informazioni, documentazione e articoli si è fatto uso dell’applicazione Microsoft Teams, per il versionamento e la gestione dei task si è fatto uso del servizio GitHub, infine per quanto riguarda l’interfaccia con cui versionare ho utilizzato GitHub Desktop.
+In generale per la gestione della comunicazione, condivisione di informazioni, documentazione e articoli si è fatto uso dell’applicazione \emph{Microsoft Teams}\glsfirstoccur, per il versionamento e la gestione dei task si è fatto uso del servizio \emph{GitHub}\glsfirstoccur, infine per quanto riguarda l’interfaccia con cui versionare ho utilizzato \emph{GitHub Desktop}\glsfirstoccur.
 
 \subsection{Linguaggio di programmazione e ambiente di sviluppo}
 
-Per la fase iniziale della codifica si è lavorato utilizzando Jupyter notebook oppure, con il quale è stato possibile scrivere metodi in linguaggio Python in modo molto agevole. Quando l'algoritmo ha raggiunto una certa completezza è stato necessario raggruppare i vari metodi in più classi e iniziare a lavorare su VisualStudio Code all'algoritmo e su Jupyter Notebook ai test da effettuare.
+Per la fase iniziale dell'implementazione si è lavorato utilizzando \emph{Jupyter Notebook}\glsfirstoccur oppure, con il quale è stato possibile scrivere metodi in linguaggio Python in modo molto agevole. Quando l'algoritmo ha raggiunto una certa completezza è stato necessario raggruppare i vari metodi in più classi e iniziare a lavorare su VisualStudio Code all'algoritmo e su Jupyter Notebook ai test da effettuare.
 Python è un linguaggio di programmazione orientato agli oggetti ed interpretato dinamicamente al momento dell’esecuzione da un interprete. Python risulta veramente versatile in quanto fornisce incredibili funzionalità utilizzabili in modo semplice e intuitivo, inoltre, dispone di moltissime librerie che permettono le più svariate operazioni, come: metodi per l'analisi statistica, la manipolazione dei dati, la creazione di grafici e operazioni sui file. 
 Le principali librerie utilizzate sono: random (per l'utilizzo delle funzioni randomiche), pandas (per la manipolazione e analisi dei dati), matplotlib (per la visualizzazione dei risultati ottenuti nei test) e statsmodel (per l'analisi statistica).
-VisualStudio Code è stato scelto per rendere agevole la codifica è stato utilizzato infatti, grazie alle sue estensioni, risulta molto versatile e completo. In particolare sono state usate estensioni generiche per python ma anche per l'uso dei notebook direttamente da VSCode e per la gestione dei file formato csv, usati nella fase di test.
+\emph{VisualStudio Code}\glsfirstoccur è stato scelto per rendere agevole l'implementazione è stato utilizzato infatti, grazie alle sue estensioni, risulta molto versatile e completo. In particolare sono state usate estensioni generiche per python ma anche per l'uso dei notebook direttamente da VSCode e per la gestione dei file formato \emph{csv}\glsfirstoccur, usati nella fase di test.
 
 \section{Analisi dei rischi}
 
