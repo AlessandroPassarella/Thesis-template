@@ -15,14 +15,14 @@ Questa sezione esplora i diversi aspetti fondamentali nella progettazione di un 
 
 \subsection{Composizione degli algoritmi evolutivi}
 
-I principali componenti di ricerca per progettare un algoritmo evolutivo sono i seguenti:
+I principali componenti di ricerca per progettare un algoritmo evolutivo sono i seguenti [\hyperlink{bibliografia}{2}]:
 
 \begin{itemize}
     \item \textbf{Rappresentazione}: negli algoritmi genetici, la soluzione codificata è chiamata cromosoma, mentre le variabili decisionali all'interno di una soluzione (cromosoma) sono i geni;
     
-    \item \textbf{Inizializzazione della popolazione}: la generazione della popolazione iniziale è un aspetto cruciale in quanto una giusta inizializzazione determina un vantaggio già dalle prime interazioni;
+    \item \textbf{Inizializzazione della popolazione}: la generazione della popolazione iniziale è un aspetto cruciale in quanto una giusta inizializzazione determina un vantaggio già dalle prime iterazioni;
     
-    \item \textbf{Funzione di fitness}: si tratta della funzione obbiettivo, ogni soluzione ha un valore di fitness che indica il grado di adeguatezza rispetto al problema;
+    \item \textbf{Funzione di fitness}: si tratta della funzione obiettivo, ogni soluzione ha un valore di fitness che indica il grado di adeguatezza rispetto al problema;
     
     \item \textbf{Strategia di selezione}: la strategia di selezione affronta la seguente domanda: "Quali genitori per la prossima generazione vengono scelti con un bias verso un fitness migliore?";
     
@@ -30,12 +30,12 @@ I principali componenti di ricerca per progettare un algoritmo evolutivo sono i 
     
     \item \textbf{Strategia di sostituzione}: i nuovi discendenti competono con gli individui più vecchi per ottenere il loro posto nella prossima generazione (sopravvivenza del più adatto);
     
-    \item \textbf{Criteri di arresto}: determina la fine del loop evolutivo, solitamente è indicato come il numero di generazioni da raggiungere, ovvero ogni interazione è una generazione.
+    \item \textbf{Criteri di arresto}: determina la fine del loop evolutivo, solitamente è indicato come il numero di generazioni da raggiungere, ovvero ogni iterazione è una generazione.
 \end{itemize}
 
-\subsection{Struttura del genetico} \hypertarget{ga}{}
+\subsection{Base dell'algoritmo genetico} \hypertarget{ga}{}
 
-In questa sezione descriviamo la struttura dell'Algoritmo Genetico scelta per il controllo delle sue fasi di intensificazione e diversificazione.[\hyperlink{bibliografia}{5}]
+In questa sezione descriviamo la struttura dell'Algoritmo Genetico scelta per il controllo delle sue fasi di intensificazione e diversificazione [\hyperlink{bibliografia}{3}].
 L'obiettivo è massimizzare una funzione di fitness $f$. I parametri richiesti dall'algoritmo GA sono:
 
 \begin{itemize}
@@ -138,7 +138,7 @@ Il crossover prende i due genitori selezionati e genera due figli da aggiungere 
 
 A differenza degli operatori unari, come la mutazione, l'operatore di crossover è binario e talvolta n-ario. Il ruolo degli operatori di crossover è di ereditare alcune caratteristiche dei due genitori per generare i discendenti. Come per l'operatore di mutazione, la progettazione degli operatori di crossover dipende principalmente dalla rappresentazione utilizzata.
 
-Applicare operatori di crossover classici alle permutazioni, come nel nostro caso, genera soluzioni che non sono permutazioni (ossia, soluzioni non valide). Di conseguenza, sono stati progettati numerosi operatori di crossover per permutazioni, tra cui il crossover a ordine (OX). Per prima cosa, due punti di crossover vengono selezionati casualmente. Dal genitore 1, si copia nel discendente, alle stesse posizioni assolute, la parte tra i due punti. Dal genitore 2, si parte dal secondo punto di crossover e si scelgono gli elementi non già selezionati dal genitore 1, inserendoli nel discendente a partire dal secondo punto di crossover. L'operatore di crossover OX è un operatore di pura ricombinazione. Se si inizia a riempire o scegliere dal primo punto di crossover, l'operatore non sarà puro. Dal genitore 1, vengono preservati l'ordine relativo, l'adiacenza e le posizioni assolute. Dal genitore 2, viene preservato solo l'ordine relativo.
+Applicare operatori di crossover classici alle permutazioni, come nel nostro caso, genera soluzioni che non sono permutazioni (ossia, soluzioni non valide). Di conseguenza, sono stati progettati numerosi operatori di crossover per permutazioni, tra cui il crossover a ordine (OX - order crossover). Per prima cosa, due punti di crossover vengono selezionati casualmente. Dal genitore 1, si copia nel discendente, alle stesse posizioni assolute, la parte tra i due punti. Dal genitore 2, si parte dal secondo punto di crossover e si scelgono gli elementi non già selezionati dal genitore 1, inserendoli nel discendente a partire dal secondo punto di crossover. L'operatore di crossover OX è un operatore di pura ricombinazione. Se si inizia a riempire o scegliere dal primo punto di crossover, l'operatore non sarà puro. Dal genitore 1, vengono preservati l'ordine relativo, l'adiacenza e le posizioni assolute. Dal genitore 2, viene preservato solo l'ordine relativo.
 
 \begin{figure}[!ht] 
     \centering 
@@ -159,7 +159,7 @@ Alcuni punti importanti da considerare nella progettazione o nell'uso di un oper
     \item \textbf{Località}: la mutazione dovrebbe produrre un cambiamento minimo. La dimensione della mutazione è importante e dovrebbe essere controllabile. La località è l'effetto sulla soluzione (fenotipo) quando si esegue la modifica (perturbazione) nella rappresentazione (genotipo). Quando vengono effettuati piccoli cambiamenti nel genotipo, il fenotipo deve rivelare piccoli cambiamenti. In questo caso, si dice che la mutazione ha una forte località. Una debole località è caratterizzata da un grande effetto sul fenotipo quando viene effettuato un piccolo cambiamento nel genotipo.
 \end{itemize}
 
-La mutazione in rappresentazioni basate sull'ordine, come nel nostro caso, è generalmente basata sugli operatori di scambio (swapping), inversione o inserimento[\hyperlink{bibliografia}{4}]. 
+La mutazione in rappresentazioni basate sull'ordine, come nel nostro caso, è generalmente basata sugli operatori di scambio (swapping), inversione o inserimento[\hyperlink{bibliografia}{2}]. 
 
 \section{Parametrizzazione}
 
@@ -270,7 +270,7 @@ Le seguenti medie sono ottenute sui valori di fitness della soluzione miglire, p
     \end{itemize}
 \end{itemize}
 
-Si può notare che da questi risultati si ottiene una configurazione migliore, tuttavia di tratta solo di risultati basati su determinate istanze. È importante sottolineare che tramite un \emph{t-test}\glsfirstoccur non sono stati rilevati sufficenti risultati per affermare che a livello statistico una configurazione è migliore di un altra[\hyperlink{bibliografia}{6}]. 
+Si può notare che da questi risultati si ottiene una configurazione migliore, tuttavia di tratta solo di risultati basati su determinate istanze. È importante sottolineare che tramite un \emph{t-test}\glsfirstoccur non sono stati rilevati sufficenti risultati per affermare che a livello statistico una configurazione è migliore di un altra[\hyperlink{bibliografia}{4}]. 
 
 \section{Implementazione}
 

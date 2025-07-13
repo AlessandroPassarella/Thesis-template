@@ -5,7 +5,7 @@
 
 \section{Approcci risolutivi}
 
-Di seguito verranno descritti alcuni approcci per la risoluzione del problema di nesting.
+Di seguito verranno descritti alcuni approcci per la risoluzione del problema di nesting. Le informazioni e immagini presenti in questo capitolo sono prese da Metaheuristics di El-Ghazali Talbi [\hyperlink{bibliografia}{2}]
 
 \subsection{Approcci esatti}
 
@@ -14,10 +14,10 @@ Gli approcci esatti come la \emph{programmazione lineare intera mista}\glsfirsto
 
 \subsection{Approcci euristici e metaeuristici} \hypertarget{metaeuristiche}{}
 
-A differenza dei metodi esatti, le \emph{metaeuristiche}\glsfirstoccur consentono di affrontare istanze di problemi di grandi dimensioni fornendo soluzioni soddisfacenti in un tempo ragionevole. Gli algoritmi metaeuristici cercano buone soluzioni a problemi di ottimizzazione in circostanze in cui la complessità del problema affrontato o il tempo di ricerca disponibile non consentono l'uso di algoritmi di ottimizzazione esatti[\hyperlink{bibliografia}{1}].
+A differenza dei metodi esatti, le \emph{metaeuristiche}\glsfirstoccur consentono di affrontare istanze di problemi di grandi dimensioni fornendo soluzioni soddisfacenti in un tempo ragionevole. Gli algoritmi metaeuristici cercano buone soluzioni a problemi di ottimizzazione in circostanze in cui la complessità del problema affrontato o il tempo di ricerca disponibile non consentono l'uso di algoritmi di ottimizzazione esatti.
 % \footcite{talbi:metaheuristics}.
 
-Gli algoritmi genetici (GA) che sono particolarmente efficaci per problemi combinatori complessi grazie alla capacità di esplorare grandi spazi di ricerca. I GA si sono dimostrati utili per il Nesting bidimensionale, permettendo l'evoluzione di soluzioni attraverso gli operatori di crossover e mutazione.
+Gli algoritmi genetici (GA) sono particolarmente efficaci per problemi combinatori complessi grazie alla capacità di esplorare grandi spazi di ricerca. I GA si sono dimostrati utili per il Nesting bidimensionale, permettendo l'evoluzione di soluzioni attraverso gli operatori di crossover e mutazione.
 
 % Jakobs (1996) ha introdotto uno dei primi GA per il problema di Nesting bidimensionale\footcite{jakobs:nesting}.
 
@@ -27,7 +27,7 @@ Combinazioni di metaeuristiche e metodi esatti (ad esempio, utilizzo di \emph{eu
 
 \section{Metaeuristiche}
 
-La scelta di utilizzare una metaeuristica per il nostro problema è dovuta alla necessità di gestire vincoli pratici specifici per il caso Salvagnini, inoltre le metaeuristiche si prestano particolarmente alla massimizzazione dell'efficacia in tempi accettabili.
+La scelta di utilizzare una metaeuristica per il nostro problema è dovuta alla necessità di gestire vincoli pratici specifici per il caso Salvagnini, inoltre le metaeuristiche si prestano particolarmente a ottenre soluzioni efficaci in tempi accettabili.
 
 Le metaeuristiche sono tecniche di ottimizzazione che cercano di risolvere problemi complessi (spesso \emph{NP-hard}\glsfirstoccur) in modo approssimato, trovando soluzioni soddisfacenti anche quando metodi tradizionali come la programmazione matematica non sono applicabili a causa della difficoltà computazionale. Presentano diversi criteri, ognuno dei quali evidenzia le caratteristiche e le differenze tra le varie strategie di ottimizzazione:
 \begin{itemize}
@@ -49,23 +49,23 @@ Vediamo le differenze in dettaglio.
 
 \subsection{Single Solution-Based} \hypertarget{ssb}{}
 
-Le metaeuristiche single solution-based (o migliorative) operano partendo da una soluzione iniziale e cercando di migliorarla attraverso un processo iterativo. Ogni iterazione esplora il vicino della soluzione attuale, cercando di ottenere una soluzione migliore. Non vengono mai generate più soluzioni contemporaneamente, ma si cerca sempre di migliorare quella attuale. Le caratteristiche principali sono:
+Le metaeuristiche single solution-based (o migliorative) operano partendo da una soluzione iniziale e cercando di migliorarla attraverso un processo iterativo. Ogni iterazione esplora i vicini della soluzione attuale, cercando di ottenere una soluzione migliore. Le caratteristiche principali sono:
 \begin{itemize}
     \item \textbf{Soluzione unica}: si lavora su una singola soluzione alla volta, cercando di modificarla attraverso diverse operazioni;
     \item \textbf{Evoluzione locale}: il processo di miglioramento della soluzione è locale, cioè si esplorano soluzioni vicine a quella attuale, dette vicinato.
 \end{itemize}
 
-Il scelta di un buon vicinato è uno degli aspetti fondamentali per le performance di un algoritmo migliorativo sia in termini di efficacia che di efficienza, come afferma Talbi, Nel progettare una metaeuristica migliorativa, si incontra spesso un compromesso tra la dimensione (o diametro) e la qualità del vicinato da utilizzare e la complessità computazionale necessaria per esplorarlo. Progettare vicinati di grandi dimensioni può migliorare la qualità delle soluzioni ottenute, poiché vengono considerati più vicini a ogni iterazione (Figura 3.1). Tuttavia, ciò richiede un tempo computazionale aggiuntivo per generare e valutare un vicinato ampio.
+Il scelta di un buon vicinato è uno degli aspetti fondamentali per le performance di un algoritmo migliorativo sia in termini di efficacia che di efficienza. Nel progettare una metaeuristica migliorativa, si incontra spesso un compromesso tra la dimensione (o diametro) e la qualità del vicinato da utilizzare e la complessità computazionale necessaria per esplorarlo. Progettare vicinati di grandi dimensioni può migliorare la qualità delle soluzioni ottenute, poiché vengono considerati più vicini a ogni iterazione (Figura 3.1). Tuttavia, ciò richiede un tempo computazionale aggiuntivo per generare e valutare un vicinato ampio.
 \begin{figure}[!ht] 
     \centering 
     \includegraphics[width=0.9\columnwidth]{tesi/vicini} 
-    \caption{Esempio di evoluzione della soluzione x, nello spazio di ricerca, con due dimenzioni di vicinato diverse}
+    \caption{Esempio di evoluzione della soluzione x, nello spazio di ricerca, con due dimensioni di vicinato diverse}
 \end{figure}
 
-Anche con la di un vicinato adeguato, occorre tenere in considerazione due possibili criticità:
+Anche con la dimensione di un vicinato adeguata, occorre tenere in considerazione due possibili criticità:
 \begin{itemize}
-    \item \textbf{Rischio di ottimizzazione locale}: poiché esplorano solo soluzioni vicine a quella attuale, c'è il rischio di rimanere bloccati in un minimo locale (local optima) senza riuscire a trovare la soluzione globale ottima (global optima) (Figura 3.2);
-    \item \textbf{Esplorazione limitata}: spesso non sono in grado di esplorare efficacemente spazi di soluzioni vasti o complessi[\hyperlink{bibliografia}{2}].
+    \item \textbf{Rischio di ottimizzazione locale}: poiché l'algoritmo esplora solo soluzioni vicine a quella attuale, c'è il rischio di rimanere bloccati in un minimo locale (local optima) senza riuscire a trovare la soluzione globale ottima (global optima) (Figura 3.2);
+    \item \textbf{Esplorazione limitata}: spesso gli algoritmi non sono in grado di esplorare efficacemente spazi di soluzioni vasti o complessi.
 \end{itemize}
 
 \begin{figure}[!ht] 
@@ -91,9 +91,11 @@ Le caratteristiche principali sono:
 
 Grazie alla combinazione fra soluzioni multiple e evoluzione globale, mantenendo le soluzioni migliori di una data popolazione, le metaeuristiche population-based bilanciano la diversificazione (cercare nuove aree dello spazio delle soluzioni) e l'intensificazione (migliorare le soluzioni trovate). In particolare, la diversificazione aumenta la possibilità di evitare minimi locali, poiché operano su spazi di ricerca vasti, e le soluzioni della popolazione possono convergere verso la soluzione globale grazie all'intensificazione generata dal mantenere le soluzioni migliori iterazione dopo iterazione.
 
-L'ottimizzazione dei parametri della popolazione (come la dimensione della popolazione e i tassi di crossover e mutazione) può essere complessa e richiedere diversi tentativi per evitare il rischio di \emph{over-tuning}\glsfirstoccur, ovvero adattare i parametri a solo certe istanze con determinate caratteristiche[\hyperlink{bibliografia}{3}].
+La calibrazione dei parametri della popolazione (come la dimensione della popolazione e i tassi di crossover e mutazione) può essere complessa e richiedere diversi tentativi per evitare il rischio di \emph{over-tuning}\glsfirstoccur, ovvero adattare i parametri a solo certe istanze con determinate caratteristiche.
 
 \subsection{Confronto single solution-based e population-based}
+
+In conclusione, le metaeuristiche single solution-based si focalizzano su una sola soluzione e migliorano gradualmente questa soluzione attraverso piccole modifiche, tuttavia, rischiano di restare bloccate in ottimi locali. Le population-based lavorano con una popolazione di soluzioni, permettendo una migliore esplorazione dello spazio di ricerca e riducendo il rischio di ottimizzazione locale, ma tendenzialmente con un costo computazionale maggiore (Tabella 3.1).
 
 \begin{table}[!ht]
     \centering
@@ -109,13 +111,11 @@ L'ottimizzazione dei parametri della popolazione (come la dimensione della popol
     \label{tab:comparison}
 \end{table}
 
-In conclusione le single solution-based si focalizzano su una sola soluzione e migliorano gradualmente questa soluzione attraverso piccole modifiche, tuttavia, rischiano di restare bloccate in ottimi locali. Le population-based lavorano con una popolazione di soluzioni, permettendo una migliore esplorazione dello spazio di ricerca e riducendo il rischio di ottimizzazione locale, ma tendenzialmente con un costo computazionale maggiore (Tabella 3.1).
-
-Scegliamo di sviluppare un algoritmo popilation-based dato si teme che la soluzione aziendale, essendo una single solution-based, possa bloccarsi in dei minimi locali. Nel seguente paragrafo introduciamo alcuni tipi di metaeuristiche popilation-based per poter scegliere quella più adatta.
+Scegliamo di sviluppare un algoritmo population-based dato si teme che la soluzione aziendale, essendo una single solution-based, possa bloccarsi in dei minimi locali. Nel seguente paragrafo introduciamo alcuni tipi di metaeuristiche population-based per poter scegliere quella più adatta.
 
 \section{Algoritmi evolutivi} \hypertarget{ea}{}
 
-Nel XIX secolo, i principi dell'ereditarietà di J. Mendel e la teoria dell'evoluzione di C. Darwin (1859) hanno gettato le basi per lo sviluppo, negli anni '80 del Novecento, degli algoritmi evolutivi (EA). Questi metodi computazionali traggono ispirazione dai processi evolutivi naturali per risolvere problemi complessi di ottimizzazione. Tra i principali paradigmi sviluppati sono presenti gli algoritmi genetici (Holland), le strategie evolutive (Rechenberg, Schwefel), la programmazione evolutiva (Fogel) e la programmazione genetica (Koza). Sebbene ciascun approccio presenti peculiarità, tutti condividono il principio di evoluzione di una popolazione attraverso iterazioni basate su selezione, riproduzione e variazione.
+Nel XIX secolo, i principi dell'ereditarietà di J. Mendel e la teoria dell'evoluzione di C. Darwin (1859) hanno gettato le basi per lo sviluppo, negli anni '80 del Novecento, degli algoritmi evolutivi (EA). Questi metodi computazionali traggono ispirazione dai processi evolutivi naturali per risolvere problemi complessi di ottimizzazione. Tra i principali paradigmi sviluppati sono presenti gli algoritmi genetici (Holland), le strategie evolutive (Rechenberg, Schwefel), la programmazione evolutiva (Fogel) e la programmazione genetica (Koza). Sebbene ciascun approccio presenti peculiarità, tutti condividono il principio di evoluzione di una popolazione attraverso iterazioni basate su selezione, riproduzione e variazione. 
 
 Gli EA si basano sul concetto di competizione. Rappresentano una classe di algoritmi di ottimizzazione iterativi che simulano l'evoluzione delle specie (Figura 3.4). Si basano sull'evoluzione di una popolazione di individui, solitamente generata in modo casuale, e ogni individuo nella popolazione rappresenta una versione codificata di una soluzione provvisoria. Una funzione obiettivo associa a ogni individuo un valore di fitness che indica la sua idoneità al problema. A ogni passo, vengono selezionati gli individui che formeranno i genitori, seguendo un paradigma di selezione in cui gli individui con un valore di fitness migliore hanno una maggiore probabilità di essere scelti. Successivamente, gli individui selezionati vengono riprodotti utilizzando operatori di variazione (ad esempio, crossover e mutazione) per generare nuovi discendenti. Infine, viene applicato uno schema di sostituzione per determinare quali individui della popolazione sopravvivranno tra i discendenti e i genitori. Questa iterazione rappresenta una generazione (Figura 3.4). Questo processo viene ripetuto fino a quando non si verifica un criterio di arresto.
 
@@ -159,7 +159,7 @@ La EP è meno utilizzata rispetto alle altre famiglie di algoritmi evolutivi, a 
 
 La programmazione genetica (genetic programming - GP) è un approccio evolutivo più recente la cui principale differenza rispetto alle altre famiglie evolutive è che gli individui evoluti sono essi stessi programmi (rappresentazione non lineare basata su alberi) anziché stringhe di lunghezza fissa provenienti da un alfabeto limitato di simboli (rappresentazione lineare). Questi programmi si evolvono combinandosi, riproducendosi o mutando, per dar luogo ad altri programmi che si adattano meglio a risolvere un determinato problema.
 
-Le GP richiedono una popolazione molto grande (ad esempio, migliaia di individui), rendendole quindi molto costose dal punto di vista computazionale. La teoria della GP è meno sviluppata rispetto alle strategie evolutive e agli algoritmi genetici. Le GP contemporanee sono ampiamente utilizzate in compiti di apprendimento automatico e data mining, come la previsione e la classificazione[\hyperlink{bibliografia}{4}].
+Le GP richiedono una popolazione molto grande (ad esempio, migliaia di individui), rendendole quindi molto costose dal punto di vista computazionale. La teoria della GP è meno sviluppata rispetto alle strategie evolutive e agli algoritmi genetici. Le GP contemporanee sono ampiamente utilizzate in compiti di apprendimento automatico e data mining, come la previsione e la classificazione.
 
 \section{Gap di ricerca}
 

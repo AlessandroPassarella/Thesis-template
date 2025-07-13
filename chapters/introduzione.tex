@@ -12,36 +12,62 @@
 % \noindent Esempio di citazione nel pie' di pagina \\
 % citazione\footcite{womak:lean-thinking} \\
 
-\section{L'azienda}
+\section{L'azienda} \hypertarget{salvagnini}{}
 
-Il lavoro svolto in questa tesi fa riferimento al periodo di stage svolto presso Salvagnini Italia S.p.A. (da ora in poi abbreviata in Salvagnini). L'azienda, situata nel nord Italia, progetta, produce e commercializza Sistemi di Produzione Flessibili (FMS) costituiti da macchine a Controllo Numerico Computerizzato (CNC) per il taglio e la piegatura della lamiera, insieme a software dedicati. I processi in un FMS Salvagnini sono progettati per garantire una produzione personalizzata, massimizzando la produttività e minimizzando sprechi di materiali e consumi. In questo contesto, sorgono numerosi problemi di ottimizzazione, gestiti dal dipartimento di Ricerca e Sviluppo (R\&S).
+Il lavoro svolto in questa tesi fa riferimento al periodo di stage svolto presso Salvagnini Italia S.p.A. (da ora in poi abbreviata in Salvagnini). L'azienda, situata nel nord Italia, progetta, produce e commercializza Flexible Manufacturing System (FMS) costituiti da macchine a Controllo Numerico Computerizzato (CNC) per il taglio e la piegatura della lamiera, insieme a software dedicati. I processi in un FMS Salvagnini sono progettati per garantire una produzione personalizzata, massimizzando la produttività e minimizzando sprechi di materiali e consumi. In questo contesto, sorgono numerosi problemi di ottimizzazione, gestiti dal dipartimento di Ricerca e Sviluppo (R\&S)  [\hyperlink{bibliografia}{1}].
 
 Da un lato, le macchine sono dotate di un numero crescente di processi automatizzati che eliminano i tempi morti e riducono le possibilità di errore. Dall'altro, una gran parte dell'ottimizzazione viene affrontata a livello software, attraverso lo sviluppo di applicazioni CAD (Computer-Aided Design) e CAM (Computer-Aided Manufacturing). Queste applicazioni assistono gli operatori con strumenti automatici per affrontare problemi complessi, come il modo in cui una macchina deve lavorare le lamiere, l'ordine in cui devono essere eseguite le operazioni, e così via.
 
 \section{Scopo dello stage}
 
-L’attività di stage prevede lo studio, sviluppo e test di un algoritmo di ottimizzazione per la risoluzione di problemi di nesting di interesse nell’ambiente Salvagnini.
-Occorre affrontare inizialmente lo studio della letteratura di Ricerca Operativa nell’ambito dell’algoritmo genetico, un metodo evolutivo che classicamente ha riportato risultati significativi in problemi affini ai suddetti. Si passa poi alla definizione del problema di nesting in Salvagnini e all’analisi del codice sviluppato internamente per la risoluzione dello stesso. Avviene poi lo sviluppo di una versione dell’algoritmo genetico che risolva il problema di nesting in esame e che allo stesso tempo si integri nell’attuale software di ottimizzazione. Infine, verrà eseguita un’analisi statistica dei risultati prodotti da tale algoritmo, confrontandolo con altri metodi risolutivi già sviluppati dall’azienda, in termini di tempo di esecuzione e di qualità delle soluzioni proposte.
+L’attività di stage prevede lo studio, sviluppo e test di un algoritmo di ottimizzazione per la risoluzione di problemi di nesting di interesse nell’ambiente Salvagnini. In particolare, lo stage vuole verificare l'efficacia di un approccio basato su algoritmi genetici.
+Occorre affrontare inizialmente lo studio della letteratura di Ricerca Operativa nell’ambito degli algoritmi genetici, un metodo evolutivo che classicamente ha riportato risultati significativi in problemi affini a quelli di interesse. Si passa poi alla definizione del problema di nesting in Salvagnini e all’analisi del codice sviluppato internamente per la risoluzione dello stesso. Avviene poi lo sviluppo di una versione dell’algoritmo genetico che risolva il problema di nesting in esame e che allo stesso tempo si integri nell’attuale software di ottimizzazione. Infine, verrà eseguita un’analisi statistica dei risultati prodotti da tale algoritmo, confrontandolo con altri metodi risolutivi già sviluppati dall’azienda, in termini di tempo di esecuzione e di qualità delle soluzioni proposte.
 
-% \section{Organizzazione del testo}
+\section{Definizione del problema}
 
-% \begin{description}
-%     \item[{\hyperref[cap:processi-metodologie]{Il secondo capitolo}}] descrive ...
-    
-%     \item[{\hyperref[cap:descrizione-stage]{Il terzo capitolo}}] approfondisce ...
-    
-%     \item[{\hyperref[cap:analisi-requisiti]{Il quarto capitolo}}] approfondisce ...
-    
-%     \item[{\hyperref[cap:progettazione-codifica]{Il quinto capitolo}}] approfondisce ...
-    
-%     \item[{\hyperref[cap:verifica-validazione]{Il sesto capitolo}}] approfondisce ...
-    
-%     \item[{\hyperref[cap:conclusioni]{Nel settimo capitolo}}] descrive ...
-% \end{description}
+In Ricerca Operativa, il \emph{Cutting Stock Problem} (CSP) rappresenta una classe di \emph{problemi di ottimizzazione combinatoria}\glsfirstoccur di rilevanza pratica che coinvolge il posizionamento di oggetti più piccoli a oggetti più grandi, generalmente con l'obiettivo di minimizzare gli scarti. I problemi di CSP possono differire tra loro per una grande varietà di caratteristiche. Ad esempio, le dimensioni sia degli oggetti piccoli che di quelli grandi possono variare da 1 a 3 dimensioni. Il caso bidimensionale riguarda il taglio di oggetti (o parti) da fogli di materiale riducendo gli scarti, come avviene nelle industrie del legno, del vetro e della lamiera.
 
-% Riguardo la stesura del testo, relativamente al documento sono state adottate le seguenti convenzioni tipografiche:
-% \begin{itemize}
-% 	\item gli acronimi, le abbreviazioni e i termini ambigui o di uso non comune menzionati vengono definiti nel glossario, situato alla fine del presente documento;
-% 	\item per la prima occorrenza dei termini riportati nel glossario viene utilizzata la seguente nomenclatura: \emph{parola}\glsfirstoccur;
-% 	\item i termini in lingua straniera o facenti parti del gergo tecnico sono evidenziati con il carattere \emph{corsivo}.
-% \end{itemize}
+\subsection{Contesto}
+
+Salvagnini produce essenzialmente due tipi di macchine da taglio, equipaggiate con tecnologie di taglio differenti: punzonatura e taglio laser. La tecnologia di punzonatura utilizza una macchina dotata di una testa multipressa che ospita diversi utensili rotanti per perforare la lamiera applicando alta pressione. Inoltre, le macchine di punzonatura Salvagnini presentano una cesoia di scarico integrata composta da due lame, indipendenti e ortogonali tra loro. La cesoia è in grado di tagliare qualsiasi lunghezza ed è utilizzata per staccare ogni pezzo lavorato dalla lamiera. Questa tecnologia di taglio è altamente efficiente per produrre diversi tipi di pezzi, tendenzialmente di forma regolare con eventuali scantonarure negli angoli. D'altra parte, le macchine da taglio laser hanno una testa ottica singola integrata con un sistema di raffreddamento a secco per controllare la temperatura delle ottiche, garantendo tagli estremamente precisi. La precisione del taglio laser consente di produrre forme intricate con dettagli fini e alta accuratezza [\hyperlink{bibliografia}{1}].
+
+%[preso da chiara]
+
+\subsection{Nesting}
+
+Il Nesting è una forma particolare del CSP a due dimensioni, in cui delgli oggetti di piccola dimensione, di forma regolare o irregolare, possono essere liberamente posizionati su uno o piu oggetti di grandi dimensioni. In questa tesi ci concentriamo su forme regolari dato che nel caso Salvagnini facciamo riferimento alle macchine con taglio a punzonatura descritte in precedenza. 
+
+Nel contesto dell’ottimizzazione del Nesting, occorre considerare una serie di vincoli che condizionano la disposizione degli elementi su un foglio. Alcuni di questi vincoli sono standard per questa tipologia di problema, mentre altri risultano specifici del caso Salvagnini. 
+
+Naturalmente gli oggetti che vengono posizionati su uno stesso foglio non devono occupare aree comuni, garantendo così che ciascun elemento abbia il proprio spazio assegnato senza interferenze. Inoltre, ogni elemento deve mantenere una distanza minima dai bordi definiti del foglio, così come tra gli altri elementi, assicurando che vi sia sufficiente spazio per le operazioni di punzonatura senza compromettere la qualità del taglio o della lavorazione. Si aggiungono poi i \emph{margini di sicurezza}\glsfirstoccur, o \emph{margini per il taglio comune}\glsfirstoccur, che si applicano quando due elementi adiacenti non condividono un bordo. In tali situazioni, è essenziale rispettare una distanza di sicurezza che garantisca la corretta separazione dei pezzi durante la lavorazione, evitando sovrapposizioni o interferenze tra le traiettorie di taglio.
+
+Dal punto di vista delle assegnazioni, vi sono due categorie di elementi: quelli obbligatori e quelli opzionali. Gli elementi obbligatori devono necessariamente essere collocati sul foglio, senza eccezioni. Gli elementi opzionali, invece, vengono utilizzati in funzione della riduzione degli \emph{scarti}\glsfirstoccur. Pertanto, questi ultimi possono non essere posizionati o possono essere posizionati solo alcuni, a seconda delle esigenze specifiche.
+
+Un ulteriore vincolo importante riguarda le \emph{precedenze}\glsfirstoccur. In particolare, si distinguono due tipi di precedenza: hard e soft. Le dimensioni di un oggetto possono influire notevolmente sull'assegnazione delle priorità, in quanto, al fine di ottimizzare lo spazio, posizonare prima un oggetto di grandi dimensioni tende ad essere la scelta migliore. La presenza di molteplici oggetti di grande dimensione richiede la possibilità di avere un ordine anche tra di essi. Le precedenze hard stabiliscono che gli elementi con una priorità più alta devono essere posizionati seguendo l'ordine prestabilito. Questo ordine è rigido e non può essere infranto. Al contrario, le precedenze soft permettono una maggiore flessibilità: esse vanno rispettate solo qualora non comportino un aumento degli scarti. In caso contrario, possono essere infrante per ottimizzare l’utilizzo del materiale.
+
+Infine, è necessario considerare le rotazioni consentite. Ogni elemento può essere ruotato per adattarsi meglio al layout, ma solo entro gli angoli permessi dagli strumenti di punzonatura (0°, 90°, 180° e 270°). Questo vincolo garantisce che le operazioni di lavorazione possano essere eseguite senza problemi e rispettando le specifiche tecniche degli strumenti.
+
+Questi vincoli, considerati nel loro insieme, rappresentano un complesso sistema di regole che deve essere gestito attentamente per ottimizzare l’utilizzo del materiale e minimizzare gli scarti, garantendo al contempo che le specifiche di lavorazione vengano rispettate.
+
+\section{Organizzazione del testo}
+
+\begin{description}
+    \item[{\hyperref[cap:processi-metodologie]{Il secondo capitolo}}] descrive ...
+    
+    \item[{\hyperref[cap:descrizione-stage]{Il terzo capitolo}}] approfondisce ...
+    
+    \item[{\hyperref[cap:analisi-requisiti]{Il quarto capitolo}}] approfondisce ...
+    
+    \item[{\hyperref[cap:progettazione-codifica]{Il quinto capitolo}}] approfondisce ...
+    
+    \item[{\hyperref[cap:verifica-validazione]{Il sesto capitolo}}] approfondisce ...
+    
+    \item[{\hyperref[cap:conclusioni]{Nel settimo capitolo}}] descrive ...
+\end{description}
+
+Riguardo la stesura del testo, relativamente al documento sono state adottate le seguenti convenzioni tipografiche:
+\begin{itemize}
+	\item gli acronimi, le abbreviazioni e i termini ambigui o di uso non comune menzionati vengono definiti nel glossario, situato alla fine del presente documento;
+	\item per la prima occorrenza dei termini riportati nel glossario viene utilizzata la seguente nomenclatura: \emph{parola}\glsfirstoccur;
+	\item i termini in lingua straniera o facenti parti del gergo tecnico sono evidenziati con il carattere \emph{corsivo}.
+\end{itemize}

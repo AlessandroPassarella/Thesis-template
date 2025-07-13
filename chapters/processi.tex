@@ -3,37 +3,12 @@
 
 \intro{In questo capitolo verranno riportati in modo approfondito lo scopo e gli obiettivi dello stage, contestualizzazione delle attività alla realtà aziendale e scadenzario delle stesse.}\\
 
-\section{Definizione del problema}
-
-In Ricerca Operativa, il \emph{Cutting Stock Problem} (CSP) rappresenta una classe di \emph{problemi di ottimizzazione combinatoria}\glsfirstoccur di rilevanza pratica che coinvolge l'assegnazione di oggetti più piccoli a oggetti più grandi, generalmente con l'obiettivo di minimizzare gli scarti. I problemi di CSP possono differire tra loro per una grande varietà di caratteristiche. Ad esempio, le dimensioni sia degli oggetti piccoli che di quelli grandi possono variare da 1 a 3 dimensioni. Il caso bidimensionale riguarda il taglio di oggetti (o parti) da fogli di materiale riducendo gli scarti, come avviene nelle industrie del legno, del vetro e della lamiera.
-
-\subsection{Contesto}
-
-Salvagnini produce essenzialmente due tipi di macchine da taglio, equipaggiate con tecnologie di taglio differenti: punzonatura e taglio laser. La tecnologia di punzonatura utilizza una macchina dotata di una testa multipressa che ospita diversi utensili rotanti per perforare la lamiera applicando alta pressione. Inoltre, le macchine di punzonatura Salvagnini presentano una cesoia di scarico integrata composta da due lame, indipendenti e ortogonali tra loro. La cesoia è in grado di tagliare qualsiasi lunghezza ed è utilizzata per staccare ogni pezzo lavorato dalla lamiera. Questa tecnologia di taglio è altamente efficiente per produrre diversi tipi di pezzi, tendenzialmente di forma regolare con eventuali scantonarure negli angoli. D'altra parte, le macchine da taglio laser hanno una testa ottica singola integrata con un sistema di raffreddamento a secco per controllare la temperatura delle ottiche, garantendo tagli estremamente precisi. La precisione del taglio laser consente di produrre forme intricate con dettagli fini e alta accuratezza.
-
-%[preso da chiara]
-
-\subsection{Nesting}
-
-Il Nesting è una forma particolare del CSP a due dimenzioni, solitamente riguarda le forme irregolari. In questa tesi ci concentriamo su forme regolari dato che nel caso Salvagnini facciamo riferimento alle macchine con taglio a punzonatura descritte in precedenza. 
-
-Nel contesto dell’ottimizzazione del Nesting, occorre considerare una serie di vincoli che condizionano la disposizione degli elementi su un foglio. Alcuni di questi vincoli sono standard per questa tipologia di problema, mentre altri risultano specifici del caso Salvagnini. 
-
-Naturalmente gli oggetti che vengono posizionati su uno stesso foglio non devono occupare aree comuni, garantendo così che ciascun elemento abbia il proprio spazio assegnato senza interferenze. Inoltre, ogni elemento deve mantenere una distanza minima dai bordi definiti del foglio, così come tra gli altri elementi, assicurando che vi sia sufficiente spazio per le operazioni di punzonatura senza compromettere la qualità del taglio o della lavorazione. Si aggiungono poi i \emph{margini di sicurezza}\glsfirstoccur, o \emph{margini per il taglio comune}\glsfirstoccur, che si applicano quando due elementi adiacenti non condividono un bordo. In tali situazioni, è essenziale rispettare una distanza di sicurezza che garantisca la corretta separazione dei pezzi durante la lavorazione, evitando sovrapposizioni o interferenze tra le traiettorie di taglio.
-
-Dal punto di vista delle assegnazioni, vi sono due categorie di elementi: quelli obbligatori e quelli opzionali. Gli elementi obbligatori devono necessariamente essere collocati sul foglio, senza eccezioni. Gli elementi opzionali, invece, vengono utilizzati in funzione della riduzione degli \emph{scarti}\glsfirstoccur. Pertanto, questi ultimi possono non essere posizionati o possono essere posizionati solo alcuni, a seconda delle esigenze specifiche.
-
-Un ulteriore vincolo importante riguarda le \emph{precedenze}\glsfirstoccur. In particolare, si distinguono due tipi di precedenza: hard e soft. Le precedenze hard stabiliscono che gli elementi con una priorità più alta devono essere posizionati prima di quelli con priorità più bassa. Questo ordine è rigido e non può essere infranto. Al contrario, le precedenze soft permettono una maggiore flessibilità: esse vanno rispettate solo qualora non comportino un aumento degli scarti. In caso contrario, possono essere infrante per ottimizzare l’utilizzo del materiale.
-
-Infine, è necessario considerare le rotazioni consentite. Ogni elemento può essere ruotato per adattarsi meglio al layout, ma solo entro gli angoli permessi dagli strumenti di punzonatura (0°, 90°, 180° e 270°). Questo vincolo garantisce che le operazioni di lavorazione possano essere eseguite senza problemi e rispettando le specifiche tecniche degli strumenti.
-
-Questi vincoli, considerati nel loro insieme, rappresentano un complesso sistema di regole che deve essere gestito attentamente per ottimizzare l’utilizzo del materiale e minimizzare gli scarti, garantendo al contempo che le specifiche di lavorazione vengano rispettate.
 
 \section{Vincoli temporali e tecnologici}
 
-L'unico vincolo tecnologico che mi è stato imposto è stato lo sviluppo dell'algoritmo tramite il linguaggio \emph{Python}\glsfirstoccur. Questo perché python rendere il processo di sviluppo più efficiente, infatti, è particolarmente adatto al \emph{fast prototyping}\glsfirstoccur, dato che non necessita di compilazione, a differenza di linguaggi come C++ e Java, e, inoltre, permette di avere maggiore flessibilità del codice grazie anche dall'uso dei \emph{notebook}\glsfirstoccur.
+L'unico vincolo tecnologico imposto è stato lo sviluppo dell'algoritmo tramite il linguaggio \emph{Python}\glsfirstoccur. Questo perché Python rendere il processo di sviluppo più efficiente, infatti, è particolarmente adatto al \emph{fast prototyping}\glsfirstoccur, dato che non necessita di compilazione, a differenza di linguaggi come C++ e Java, e, inoltre, permette di avere maggiore flessibilità del codice grazie anche dall'uso dei \emph{notebook}\glsfirstoccur.
 
-Prima di iniziare lo stage è stato concordato con l’azienda un piano di lavoro su un totale di 304 ore, lavorando 5 giorni a settimana, 8 ore per ciascun giorno eccetto il venerdì che per politica aziendale prevede 6,5 ore. 
+Prima di iniziare lo stage, è stato concordato con l’azienda un piano di lavoro su un totale di 304 ore, lavorando 5 giorni a settimana, 8 ore per ciascun giorno eccetto il venerdì che per politica aziendale prevede 6,5 ore. 
 
 \section{Obiettivi}
 
@@ -41,7 +16,7 @@ Ogni obiettivo è provvisto di un codice identificativo formato da una delle seg
 \begin{center}
     [Importanza][Identificativo]
 \end{center}
-Gli obbiettivi rappresentano ciò che vogliamo ottenere dell'attività di stage e sono divisi, a seconda dell'importanza, come segue:
+Gli obiettivi rappresentano ciò che vogliamo ottenere dell'attività di stage e sono divisi, a seconda dell'importanza, come segue:
 \begin{itemize}
     \item Obiettivi obbligatori \textbf{(OB)}: 
     Rappresentano gli obiettivi vincolanti che dovranno essere necessariamente soddisfatti;
@@ -50,6 +25,7 @@ Gli obbiettivi rappresentano ciò che vogliamo ottenere dell'attività di stage 
     \item Obiettivi facoltativi \textbf{(FA)}:
     Rappresentano gli obiettivi facoltativi non vincolanti ma dal valore aggiunto non strettamente competitivo.
 \end{itemize}
+Le seguenti tabelle 2.1, 2.2 e 2.3 rappresentano rispettivamente, le tabelle di obiettivi obbligatori, opzionali e facoltativi.
 Ogni obbiettivo è affiancato da una breve descrizione.
 
 
@@ -90,7 +66,7 @@ FA1 & Adattamento e test dell'algoritmo genetico sviluppato su problemi di nesti
 
 \section{Pianificazione}
 
-Divisione delle attività da svolgere con una stima in termini di ore della durata di ciascuna attività.\\
+La tabella 2.4 indica la divisione delle attività da svolgere con una stima in termini di ore della durata di ciascuna attività.\\
 
 \begin{table}[H]
 \centering
@@ -132,7 +108,7 @@ In generale per la gestione della comunicazione, condivisione di informazioni, d
 
 \subsection{Linguaggio di programmazione e ambiente di sviluppo}
 
-Per la fase iniziale dell'implementazione si è lavorato utilizzando \emph{Jupyter Notebook}\glsfirstoccur oppure, con il quale è stato possibile scrivere metodi in linguaggio Python in modo molto agevole. Quando l'algoritmo ha raggiunto una certa completezza è stato necessario raggruppare i vari metodi in più classi e iniziare a lavorare su VisualStudio Code all'algoritmo e su Jupyter Notebook ai test da effettuare.
+Per la fase iniziale dell'implementazione si è lavorato utilizzando \emph{Jupyter Notebook}\glsfirstoccur oppure, con il quale è stato possibile scrivere metodi in linguaggio Python in modo molto agevole. Quando l'algoritmo ha raggiunto una certa completezza, è stato necessario raggruppare i vari metodi in più classi e iniziare a lavorare su VisualStudio Code all'algoritmo e su Jupyter Notebook ai test da effettuare.
 Python è un linguaggio di programmazione orientato agli oggetti ed interpretato dinamicamente al momento dell’esecuzione da un interprete. Python risulta veramente versatile in quanto fornisce incredibili funzionalità utilizzabili in modo semplice e intuitivo, inoltre, dispone di moltissime librerie che permettono le più svariate operazioni, come: metodi per l'analisi statistica, la manipolazione dei dati, la creazione di grafici e operazioni sui file. 
 Le principali librerie utilizzate sono: random (per l'utilizzo delle funzioni randomiche), pandas (per la manipolazione e analisi dei dati), matplotlib (per la visualizzazione dei risultati ottenuti nei test) e statsmodel (per l'analisi statistica).
 \emph{VisualStudio Code}\glsfirstoccur è stato scelto per rendere agevole l'implementazione è stato utilizzato infatti, grazie alle sue estensioni, risulta molto versatile e completo. In particolare sono state usate estensioni generiche per python ma anche per l'uso dei notebook direttamente da VSCode e per la gestione dei file formato \emph{csv}\glsfirstoccur, usati nella fase di test.
@@ -151,6 +127,8 @@ I rischi rispettano la seguente nomenclatura:
 \begin{center}
     [Categoria][Identificativo]
 \end{center}
+
+Le seguenti tabelle da 2.5 a 2.11 contengono l'analisi di ciascun rischio.
 
 \risk{RP1 - Mancanza di competenze tecniche specifiche}
 {Mancanza di esperienze professionali nella realizzazione dell'algoritmo. Mancanza di conoscenze delle tecnologie necessarie allo sviluppo del prodotto.}
