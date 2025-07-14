@@ -49,6 +49,36 @@ Infine, è necessario considerare le rotazioni consentite. Ogni elemento può es
 
 Questi vincoli, considerati nel loro insieme, rappresentano un complesso sistema di regole che deve essere gestito attentamente per ottimizzare l’utilizzo del materiale e minimizzare gli scarti, garantendo al contempo che le specifiche di lavorazione vengano rispettate.
 
+\section{Dichiarazione del problema}
+
+Di seguto è descritto il problema di nesting di forme regolari con tecnologia di taglio a punzonatura [\hyperlink{bibliografia}{5}].
+
+\begin{itemize}
+    \item \textbf{Input}
+    \begin{itemize}
+        \item Dati sui fogli: larghezza, altezza, spessore, margini di sicurezza e quantità disponibile per ciascun tipo di foglio.
+        \item Dati sugli elementi obbligatori: larghezza, altezza rotazioni consentite, zone di posizionamento proibite e obbligatorie, margini di punzonatura, livelli di precedenza hard e soft.
+        \item Dati sugli elementi opzionali: larghezza, altezza, rotazioni consentite, zone di posizionamento proibite e obbligatorie, margini di punzonatura.
+    \end{itemize}
+    \item \textbf{Output}: sequenza di di layout di taglio.
+    \item \textbf{Vinvoli rigidi}
+    \begin{itemize}
+        \item Quantità massima dei tipi di foglio;
+        \item Non sovrapposizione;
+        \item Margini di punzonatura;
+        \item Margini di sicurezza o taglio comune;
+        \item Assegnazione degli elementi obbligatori;
+        \item Assegnazione degli elementi opzionali;
+        \item Precedenze hard;
+        \item Rotazioni consentite;
+        \item Vincoli su zone obbligatorie;
+        \item Vincoli su zone proibite.
+    \end{itemize}
+    \item \textbf{Vincoli flessibili}: una soluzione ammissibile dovrebbe, a parità di scarto generato, rispettare il vincolo di precedenza soft.
+    \item \textbf{Funzione obiettivo}: minimizzare la quantità totale di materiale scartato.
+\end{itemize}
+
+
 \section{Organizzazione del testo}
 
 \begin{description}
