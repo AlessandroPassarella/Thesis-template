@@ -35,12 +35,20 @@ Inoltre, è stato impostando il parametro di \emph{pilot\_method\_prob} a 0,1 (o
 
 Per affrontare il problema del nesting, l'azenda utilizza un software in grado di generare schemi di taglio per tecnologie sia di punzonatura che di taglio laser, gestendo i vincoli tecnologici associati. Sebbene il software funzioni come una \emph{black-box}\glsfirstoccur, offre parametri configurabili dall'utente per generare soluzioni in base a diverse esigenze. Il software si è dimostrato altamente affidabile, fornendo costantemente soluzioni di alta qualità anche con limiti di tempo ridotti.
 
+\begin{figure}[!ht] 
+    \centering 
+    \includegraphics[width=0.9\columnwidth]{tesi/output2} 
+    \caption{Confronto GA con soluzione aziendale}
+\end{figure}
+
 Il confronto con la soluzione aziendale è fatto prendendo la soluzione migliore ottenuta per ogni istanza dal genetico e la soluzione migliore ottenuta per ogni istanza dalla soluzione aziendale.
+
+La Figura 6.1 mostra un grafico a barre in cui nell'asse y è presente il numero delle istanze, mentre, nell'asse x: 'Better' indica le istanze che hanno ottenuto un risultato migliore con GA, 'Same' indica le istanze che hanno ottenuto lo stesso risultato sia con GA che con la soluzione aziendale e 'Worse' indica le istanze che hanno ottenuto un risultato peggiore con GA.
 
 Dalle due soluzioni viene confrontata la quantità di scarto totale prodotto:
 \begin{itemize}
-    \item 56 istanze eseguite con GA hanno ottenuto una soluzione che ha prodotto meno scarto rispetto dalla soluzione aziendale.
-    \item 535 istanze hanno ottenuro lo stesso risultato.
+    \item 56 istanze eseguite con GA hanno ottenuto una soluzione che ha prodotto meno scarto rispetto dalla soluzione aziendale;
+    \item 535 istanze hanno ottenuro lo stesso risultato;
     \item 129 istanze hanno ottenuto un risultato peggiore rispetto alla soluzione aziendale.
 \end{itemize}
 
