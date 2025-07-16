@@ -9,7 +9,7 @@ Questa sezione esplora i diversi aspetti fondamentali nella progettazione di un 
 
 \subsection{Composizione degli algoritmi evolutivi} \hypertarget{elementi}{}
 
-I principali componenti di ricerca per progettare un algoritmo evolutivo sono i seguenti [\hyperlink{bibliografia}{2}]:
+I principali componenti di ricerca per progettare un algoritmo evolutivo sono i seguenti [\hyperlink{bibliografia}{1}]:
 
 \begin{itemize}
     \item \textbf{Rappresentazione}: negli algoritmi genetici, la soluzione codificata è chiamata cromosoma, mentre le variabili decisionali all'interno di una soluzione (cromosoma) sono i geni;
@@ -29,7 +29,7 @@ I principali componenti di ricerca per progettare un algoritmo evolutivo sono i 
 
 \subsection{Base dell'algoritmo genetico} \hypertarget{ga}{}
 
-In questa sezione descriviamo la struttura dell'Algoritmo Genetico scelta per il controllo delle sue fasi di intensificazione e diversificazione [\hyperlink{bibliografia}{3}].
+In questa sezione descriviamo la struttura dell'Algoritmo Genetico scelta per il controllo delle sue fasi di intensificazione e diversificazione [\hyperlink{bibliografia}{4}].
 L'obiettivo è massimizzare una funzione di fitness $f$. I parametri richiesti dall'algoritmo GA sono:
 
 \begin{itemize}
@@ -56,7 +56,7 @@ end
 \subsubsection{Riproduzione}
 In questa fase utilizziamo operatori binari (crossover) e unari (mutazione) per esplorare altre soluzioni alterando solo una parte della soluzione. Questa modifica parziale (invece di una riorganizzazione totale, che sarebbe una ricerca casuale), insieme al sostegno degli individui più idonei (es. selezione dei genitori), porta l'algoritmo a spingere avanti nelle generazioni le soluzioni più idonee mantenendo un buon tasso di esplorazione di nuovi cromosomi. La dimensione dei discendenti richiesta è pari alla dimensione della popolazione $N$, che poi subisce la procedura di sostituzione.
 
-La probabilità di riproduzione indicata con $Be(p)$, ovvero, la variabile casuale di Bernoulli che assume valore 1 con probabilità $p$ e 0 con probabilità $1-p$. Di segito è presente il pseudocodice della funzione Reproduction.
+La probabilità di riproduzione indicata con $Be(p)$, ovvero, la variabile casuale di Bernoulli che assume valore 1 con probabilità $p$ e 0 con probabilità $1-p$. Di segito è presente lo pseudocodice della funzione Reproduction.
 
 \begin{lstlisting}
     def Reproduction(P, pc, pm, M):
@@ -87,7 +87,7 @@ La strategia di rimpiazzo ha un grande impatto sull'intensificazione. La metodol
     \item i migliori $|P| - E$ discendenti di $G$ sono inclusi nella popolazione successiva.
 \end{enumerate}
 
-\noindent Di segito è presente il pseudocodice della funzione Replace.
+\noindent Di segito è presente lo pseudocodice della funzione Replace.
 
 \begin{lstlisting}
     def Replace(P, G, E):
@@ -99,7 +99,7 @@ La strategia di rimpiazzo ha un grande impatto sull'intensificazione. La metodol
 
 \subsection{Operatori genetici} \hypertarget{og}{}
 
-Gli operatori genetici permettono agli algoritmi evolutivi di modulare la diversificazione. Operano sui cromosomi alterandone i geni e permettendo di esplorare un ampio spazio di soluzioni senza andare a perdere intensificazione grazie alla selezione e all'elitismo. Le informazioni e immagini riportate in questa sezione sono prese da Metaheuristics di El-Ghazali Talbi [\hyperlink{bibliografia}{2}].
+Gli operatori genetici permettono agli algoritmi evolutivi di modulare la diversificazione. Operano sui cromosomi alterandone i geni e permettendo di esplorare un ampio spazio di soluzioni senza andare a perdere intensificazione grazie alla selezione e all'elitismo. Le informazioni e immagini riportate in questa sezione sono prese da Metaheuristics di El-Ghazali Talbi [\hyperlink{bibliografia}{1}].
 
 \subsubsection{Selezione}
 
@@ -109,22 +109,23 @@ Il meccanismo di selezione è uno dei principali componenti di ricerca negli alg
 
 La strategia di selezione determina quali individui vengono scelti per l'accoppiamento (riproduzione).
 
-La selezione tramite ruota della roulette è la strategia di selezione più comune. Essa assegna a ciascun individuo una probabilità di selezione proporzionale alla sua fitness relativa (Figura 5.1). Sia $f_i$ la fitness dell'individuo $p_i$ nella popolazione $P$. La probabilità di selezione è data da:
+La selezione tramite ruota della roulette è la strategia di selezione più comune. Essa assegna a ciascun individuo una probabilità di selezione proporzionale alla sua fitness relativa (Figura 4.1). Sia $f_i$ la fitness dell'individuo $p_i$ nella popolazione $P$. La probabilità di selezione è data da:
 
 \[ p_i = \frac{f_i}{\sum_{j=1}^{n} f_j} \]
 
-Immaginiamo un grafico a torta in cui a ciascun individuo è assegnato uno spazio proporzionale alla sua fitness. Una ruota della roulette è posizionata attorno al grafico. La selezione di $\mu$ individui avviene tramite $\mu$ spin indipendenti della ruota. Ogni spin seleziona un singolo individuo. Gli individui migliori occupano più spazio e, di conseguenza, hanno maggiori probabilità di essere scelti (Figura 5.2).
-
+Immaginiamo un grafico a torta in cui a ciascun individuo è assegnato uno spazio proporzionale alla sua fitness. Una ruota della roulette è posizionata attorno al grafico. La selezione di $\mu$ individui avviene tramite $\mu$ spin indipendenti della ruota. Ogni spin seleziona un singolo individuo. Gli individui migliori occupano più spazio e, di conseguenza, hanno maggiori probabilità di essere scelti (Figura 4.2).
+\hypertarget{img6}{}
 \begin{figure}[!ht] 
     \centering 
     \includegraphics[width=0.6\columnwidth]{tesi/fitness_roulette_wheel} 
-    \caption{Pesi della ruota}
+    \caption[Pesi della ruota]{Pesi della ruota [\hyperlink{bibliografia}{1}]}
 \end{figure}
 
+\hypertarget{img7}{}
 \begin{figure}[!ht] 
     \centering 
     \includegraphics[width=0.6\columnwidth]{tesi/roulette_wheel} 
-    \caption{Grafico a torta della selezione tramite ruota della roulette}
+    \caption[Grafico a torta della selezione tramite ruota della roulette]{Grafico a torta della selezione tramite ruota della roulette [\hyperlink{bibliografia}{1}]}
 \end{figure}
 
 Tuttavia, nella selezione tramite ruota della roulette, individui eccezionali possono introdurre un bias all'inizio della ricerca, causando una convergenza prematura e una perdita di diversità genetica. Infatti, va notato che un valore di \( M \) troppo piccolo intensifica il focus sui migliori individui del \emph{Mating Pool}, riducendo però la diversificazione della popolazione. Questo compromesso deve essere attentamente bilanciato per garantire un efficace equilibrio tra esplorazione e sfruttamento nel processo evolutivo.
@@ -134,12 +135,12 @@ Il crossover prende i due genitori selezionati e genera due figli da aggiungere 
 
 A differenza degli operatori unari, come la mutazione, l'operatore di crossover è binario e talvolta n-ario. Il ruolo degli operatori di crossover è di ereditare alcune caratteristiche dei due genitori per generare i discendenti. Come per l'operatore di mutazione, la progettazione degli operatori di crossover dipende principalmente dalla rappresentazione utilizzata.
 
-Applicare operatori di crossover classici alle permutazioni, come nel nostro caso, genera soluzioni che non sono permutazioni (ossia, soluzioni non valide). Di conseguenza, sono stati progettati numerosi operatori di crossover per permutazioni, tra cui il crossover a ordine (OX - order crossover) (Figura 5.3). Per prima cosa, due punti di crossover vengono selezionati casualmente. Dal genitore 1, si copia nel discendente, alle stesse posizioni assolute, la parte tra i due punti. Dal genitore 2, si parte dal secondo punto di crossover e si scelgono gli elementi non già selezionati dal genitore 1, inserendoli nel discendente a partire dal secondo punto di crossover. L'operatore di crossover OX è un operatore di pura ricombinazione. Se si inizia a riempire o scegliere dal primo punto di crossover, l'operatore non sarà puro. Dal genitore 1, vengono preservati l'ordine relativo, l'adiacenza e le posizioni assolute. Dal genitore 2, viene preservato solo l'ordine relativo. 
+Applicare operatori di crossover classici alle permutazioni, come nel nostro caso, genera soluzioni che non sono permutazioni (ossia, soluzioni non valide). Di conseguenza, sono stati progettati numerosi operatori di crossover per permutazioni, tra cui il crossover a ordine (OX - order crossover) (Figura 4.3). Per prima cosa, due punti di crossover vengono selezionati casualmente. Dal genitore 1, si copia nel discendente, alle stesse posizioni assolute, la parte tra i due punti. Dal genitore 2, si parte dal secondo punto di crossover e si scelgono gli elementi non già selezionati dal genitore 1, inserendoli nel discendente a partire dal secondo punto di crossover. L'operatore di crossover OX è un operatore di pura ricombinazione. Se si inizia a riempire o scegliere dal primo punto di crossover, l'operatore non sarà puro. Dal genitore 1, vengono preservati l'ordine relativo, l'adiacenza e le posizioni assolute. Dal genitore 2, viene preservato solo l'ordine relativo. 
 
 \begin{figure}[!ht] 
     \centering 
     \includegraphics[width=1\columnwidth]{tesi/OXCrossover} 
-    \caption{Rappresentazione del crossover OX}
+    \caption[Rappresentazione del crossover OX]{Rappresentazione del crossover OX [\hyperlink{bibliografia}{2}]}
 \end{figure}
 
 \subsubsection{Mutazione}
@@ -192,7 +193,7 @@ Di seguito verranno mostrati alcuni grafici di test svolti su delle singole ista
 L'asse y rappresenta il valore di fitness (da 0.75 a 0.95, dove 0 significa che lo spazio sprecato è tutto, e 1 che non c'è spazio sprecato). L'asse x rappresenta il numero di generazioni (da 0 a 50).
 La trasparenza è regolata in modo che più sono presenti cromosomi maggiore è l'intensità del blu.
 
-Dal seguente grafico (Figura 5.4) si nota come ci sia una buona diversificazione ma il valore di fitness della soluzione migliore converge troppo presto, infatti, intorno alla 15esima generazione stabilizza il valore di fitness della soluzione migliore. 
+Dal seguente grafico (Figura 4.4) si nota come ci sia una buona diversificazione ma il valore di fitness della soluzione migliore converge troppo presto, infatti, intorno alla 15esima generazione stabilizza il valore di fitness della soluzione migliore. 
 
 \begin{figure}[!ht] 
     \centering 
@@ -209,7 +210,7 @@ Ulteriori test sono stati eseguiti con la \textbf{Conf2}:
 	\item\textbf{elite\_size}: 5.
 \end{itemize}
 
-Per cercare subito un confronto la prima modifica è stata nella \emph{mating\_pool\_size}, portandola a 40 (da 20) (Figura 5.5), questo ha aumentato notevolmente la diversificazione ed ha trovato soluzioni con un valore di fitness migliore delle soluzioni migliori con la Conf1. 
+Per cercare subito un confronto la prima modifica è stata nella \emph{mating\_pool\_size}, portandola a 40 (da 20) (Figura 4.5), questo ha aumentato notevolmente la diversificazione ed ha trovato soluzioni con un valore di fitness migliore delle soluzioni migliori con la Conf1. 
 
 \begin{figure}[!ht] 
     \centering 
@@ -228,7 +229,7 @@ Questo ha indicato come sicuramente sono presenti soluzioni migliori ottenibili 
 	\item\textbf{elite\_size}: 5.
 \end{itemize}
 
-La figura 5.6 mostra l'andamento dei valori di fitness di un test con la configurazione 3, che ha una \emph{mating\_pool\_size} corrispondente al 60\% della popolazione, che genera un bilanciamento ottimale fra intensificazione, diversificazione e velocità di esecuzione. Infatti, un altro problema della Conf2 era che una \emph{mating\_pool\_size} di 40 faceva svolgere una generazione in molto più tempo rispetto alla Conf1, quindi, siccome i test di confronto con la soluzione aziendale sarebbero stati svolti non con un criterio di arresto basato sulle generazione ma sul tempo, è stato necessario diminuire la \emph{mating\_pool\_size}.
+La Figura 4.6 mostra l'andamento dei valori di fitness di un test con la configurazione 3, che ha una \emph{mating\_pool\_size} corrispondente al 60\% della popolazione, che genera un bilanciamento ottimale fra intensificazione, diversificazione e velocità di esecuzione. Infatti, un altro problema della Conf2 era che una \emph{mating\_pool\_size} di 40 faceva svolgere una generazione in molto più tempo rispetto alla Conf1, quindi, siccome i test di confronto con la soluzione aziendale sarebbero stati svolti non con un criterio di arresto basato sulle generazione ma sul tempo, è stato necessario diminuire la \emph{mating\_pool\_size}.
 
 \begin{figure}[!ht] 
     \centering 
@@ -266,7 +267,7 @@ Le seguenti medie sono ottenute sui valori di fitness della soluzione miglire, p
     \end{itemize}
 \end{itemize}
 
-Si può notare che da questi risultati che la configurazione migliore risulta essere la 3, tuttavia di tratta solo di risultati basati su determinate istanze. È importante sottolineare che tramite un \emph{t-test}\glsfirstoccur non sono stati rilevati sufficenti risultati per affermare che a livello statistico una configurazione è migliore di un altra[\hyperlink{bibliografia}{4}]. 
+Si può notare che da questi risultati che la configurazione migliore risulta essere la 3, tuttavia di tratta solo di risultati basati su determinate istanze. È importante sottolineare che tramite un \emph{t-test}\glsfirstoccur non sono stati rilevati sufficenti risultati per affermare che a livello statistico una configurazione è migliore di un altra [\hyperlink{bibliografia}{8}]. 
 
 
 % \section{Modello}

@@ -1,11 +1,11 @@
 \chapter{Analisi della letteratura}
 \label{cap:descrizione-stage}
 
-\intro{Questo capitolo si pone l'obbiettivo di introdurre una conoscenza teorica per comprendere la scelta di utilizzare un algoritmo genetico per risolvere il problema in questione. Verranno esposti diversi metodi risolutivi, successivamente è presente una descrizione dei due approcci metaeuristici principali presi in considerazione e, infine, una spiegazione degli algoritmi evolutivi.}\\
+\intro{Questo capitolo si pone l'obiettivo di introdurre una conoscenza teorica per comprendere la scelta di utilizzare un algoritmo genetico per risolvere il problema in questione. Verranno esposti diversi metodi risolutivi, quindi si darà una descrizione dei due approcci metaeuristici principali presi in considerazione e, infine, una spiegazione degli algoritmi evolutivi.}\\
 
 \section{Approcci risolutivi} \hypertarget{metaeuristiche}{}
 
-Di seguito verranno descritti alcuni approcci per la risoluzione del problema di nesting. Le informazioni e immagini presenti in questo capitolo sono prese da Metaheuristics di El-Ghazali Talbi [\hyperlink{bibliografia}{2}]
+Di seguito verranno descritti alcuni approcci per la risoluzione del problema di nesting. Le informazioni e immagini presenti in questo capitolo sono prese da Metaheuristics di El-Ghazali Talbi [\hyperlink{bibliografia}{1}].
 
 \subsection{Approcci esatti}
 
@@ -27,7 +27,7 @@ Combinazioni di metaeuristiche e metodi esatti (ad esempio, utilizzo di \emph{eu
 
 \section{Metaeuristiche}
 
-La scelta di utilizzare una metaeuristica per il nostro problema è dovuta alla necessità di gestire vincoli pratici specifici per il caso Salvagnini, inoltre le metaeuristiche si prestano particolarmente a ottenre soluzioni efficaci in tempi accettabili.
+La scelta di utilizzare una metaeuristica per il nostro problema è dovuta alla necessità di gestire vincoli pratici specifici per il caso Salvagnini, inoltre le metaeuristiche si prestano particolarmente a ottenere soluzioni efficaci in tempi accettabili.
 
 Le metaeuristiche sono tecniche di ottimizzazione che cercano di risolvere problemi complessi (spesso \emph{NP-hard}\glsfirstoccur) in modo approssimato, trovando soluzioni soddisfacenti anche quando metodi tradizionali come la programmazione matematica non sono applicabili a causa della difficoltà computazionale. Presentano diversi criteri, ognuno dei quali evidenzia le caratteristiche e le differenze tra le varie strategie di ottimizzazione:
 \begin{itemize}
@@ -55,11 +55,11 @@ Le metaeuristiche single solution-based (o migliorative) operano partendo da una
     \item \textbf{Evoluzione locale}: il processo di miglioramento della soluzione è locale, cioè si esplorano soluzioni vicine a quella attuale, dette vicinato.
 \end{itemize}
 
-Il scelta di un buon vicinato è uno degli aspetti fondamentali per le performance di un algoritmo migliorativo sia in termini di efficacia che di efficienza. Nel progettare una metaeuristica migliorativa, si incontra spesso un compromesso tra la dimensione (o diametro) e la qualità del vicinato da utilizzare e la complessità computazionale necessaria per esplorarlo. Progettare vicinati di grandi dimensioni può migliorare la qualità delle soluzioni ottenute, poiché vengono considerati più vicini a ogni iterazione (Figura 3.1). Tuttavia, ciò richiede un tempo computazionale aggiuntivo per generare e valutare un vicinato ampio.
+La scelta di un buon vicinato è uno degli aspetti fondamentali per le performance di un algoritmo migliorativo sia in termini di efficacia che di efficienza. Nel progettare una metaeuristica migliorativa, si incontra spesso un compromesso tra la dimensione (o diametro) e la qualità del vicinato da utilizzare e la complessità computazionale necessaria per esplorarlo. Progettare vicinati di grandi dimensioni può migliorare la qualità delle soluzioni ottenute, poiché vengono considerati più vicini a ogni iterazione (Figura 3.1). Tuttavia, ciò richiede un tempo computazionale aggiuntivo per generare e valutare un vicinato ampio. \hypertarget{img1}{}
 \begin{figure}[!ht] 
     \centering 
     \includegraphics[width=0.9\columnwidth]{tesi/vicini} 
-    \caption{Esempio di evoluzione della soluzione x, nello spazio di ricerca, con due dimensioni di vicinato diverse}
+    \caption[Esempio di evoluzione della soluzione x, nello spazio di ricerca, con due dimensioni di vicinato diverse]{Esempio di evoluzione della soluzione x, nello spazio di ricerca, con due dimensioni di vicinato diverse [\hyperlink{bibliografia}{1}]} 
 \end{figure}
 
 Anche con la dimensione di un vicinato adeguata, occorre tenere in considerazione due possibili criticità:
@@ -67,11 +67,11 @@ Anche con la dimensione di un vicinato adeguata, occorre tenere in considerazion
     \item \textbf{Rischio di ottimizzazione locale}: poiché l'algoritmo esplora solo soluzioni vicine a quella attuale, c'è il rischio di rimanere bloccati in un minimo locale (local optima) senza riuscire a trovare la soluzione globale ottima (global optima) (Figura 3.2);
     \item \textbf{Esplorazione limitata}: spesso gli algoritmi non sono in grado di esplorare efficacemente spazi di soluzioni vasti o complessi.
 \end{itemize}
-
+\hypertarget{img2}{}
 \begin{figure}[!ht] 
     \centering 
     \includegraphics[width=0.9\columnwidth]{tesi/ottimi} 
-    \caption{Minimi locali e minimi globali in uno spazio di ricerca, possono esserci più minimi globali}
+    \caption[Minimi locali e minimi globali in uno spazio di ricerca, possono esserci più minimi globali]{Minimi locali e minimi globali in uno spazio di ricerca, possono esserci più minimi globali [\hyperlink{bibliografia}{1}]}
 \end{figure}
 
 \subsection{Population-Based} \hypertarget{pb}{}
@@ -82,11 +82,11 @@ Le caratteristiche principali sono:
     \item \textbf{Soluzioni multiple}: l'algoritmo opera su una popolazione di soluzioni che vengono evolute nel tempo;
     \item \textbf{Evoluzione globale}: la popolazione viene aggiornata in modo che le soluzioni migliori vengano selezionate per creare nuove soluzioni, combinando diversità e convergenza.
 \end{itemize}
-
+\hypertarget{img3}{}
 \begin{figure}[!ht] 
     \centering 
     \includegraphics[width=0.9\columnwidth]{tesi/popolazione} 
-    \caption{Principio generale delle metaeuristiche population-based}
+    \caption[Principio generale delle metaeuristiche population-based]{Principio generale delle metaeuristiche population-based [\hyperlink{bibliografia}{1}]}
 \end{figure}
 
 Grazie alla combinazione fra soluzioni multiple e evoluzione globale, mantenendo le soluzioni migliori di una data popolazione, le metaeuristiche population-based bilanciano la diversificazione (cercare nuove aree dello spazio delle soluzioni) e l'intensificazione (migliorare le soluzioni trovate). In particolare, la diversificazione aumenta la possibilità di evitare minimi locali, poiché operano su spazi di ricerca vasti, e le soluzioni della popolazione possono convergere verso la soluzione globale grazie all'intensificazione generata dal mantenere le soluzioni migliori iterazione dopo iterazione.
@@ -107,30 +107,30 @@ In conclusione, le metaeuristiche single solution-based si focalizzano su una so
     Esplorazione dello spazio di ricerca & Localizzata, vicina alla soluzione attuale, focus su intensidicazione & Maggiore esplorazione e diversificazione \\ \hline
     Rischio di ottimizzazione locale & Più alto, poiché esplora soluzioni vicine & Più basso, grazie alla diversità della popolazione \\ \hline
     \end{tabular}
-    \caption{Confronto tra metaeuristiche single solution-based e population-based.}
+    \caption[]{Confronto tra metaeuristiche single solution-based e population-based.}
     \label{tab:comparison}
 \end{table}
 
-Scegliamo di sviluppare un algoritmo population-based dato si teme che la soluzione aziendale, essendo una single solution-based, possa bloccarsi in dei minimi locali. Nel seguente paragrafo introduciamo alcuni tipi di metaeuristiche population-based per poter scegliere quella più adatta.
+Scegliamo di sviluppare un algoritmo population-based dato che si teme che la soluzione aziendale, essendo una single solution-based, possa bloccarsi in dei minimi locali. Nel seguente paragrafo introduciamo alcuni tipi di metaeuristiche population-based per poter scegliere quella più adatta.
 
 \section{Algoritmi evolutivi} \hypertarget{ea}{}
 
 Nel XIX secolo, i principi dell'ereditarietà di J. Mendel e la teoria dell'evoluzione di C. Darwin (1859) hanno gettato le basi per lo sviluppo, negli anni '80 del Novecento, degli algoritmi evolutivi (EA). Questi metodi computazionali traggono ispirazione dai processi evolutivi naturali per risolvere problemi complessi di ottimizzazione. Tra i principali paradigmi sviluppati sono presenti gli algoritmi genetici (Holland), le strategie evolutive (Rechenberg, Schwefel), la programmazione evolutiva (Fogel) e la programmazione genetica (Koza). Sebbene ciascun approccio presenti peculiarità, tutti condividono il principio di evoluzione di una popolazione attraverso iterazioni basate su selezione, riproduzione e variazione. 
 
 Gli EA si basano sul concetto di competizione. Rappresentano una classe di algoritmi di ottimizzazione iterativi che simulano l'evoluzione delle specie (Figura 3.4). Si basano sull'evoluzione di una popolazione di individui, solitamente generata in modo casuale, e ogni individuo nella popolazione rappresenta una versione codificata di una soluzione provvisoria. Una funzione obiettivo associa a ogni individuo un valore di fitness che indica la sua idoneità al problema. A ogni passo, vengono selezionati gli individui che formeranno i genitori, seguendo un paradigma di selezione in cui gli individui con un valore di fitness migliore hanno una maggiore probabilità di essere scelti. Successivamente, gli individui selezionati vengono riprodotti utilizzando operatori di variazione (ad esempio, crossover e mutazione) per generare nuovi discendenti. Infine, viene applicato uno schema di sostituzione per determinare quali individui della popolazione sopravvivranno tra i discendenti e i genitori. Questa iterazione rappresenta una generazione (Figura 3.4). Questo processo viene ripetuto fino a quando non si verifica un criterio di arresto.
-
+\hypertarget{img4}{}
 \begin{figure}[!ht] 
     \centering 
     \includegraphics[width=0.9\columnwidth]{tesi/evoluzione} 
-    \caption{Una generazione negli algoritmi evolutivi}
+    \caption[Una generazione negli algoritmi evolutivi]{Una generazione negli algoritmi evolutivi [\hyperlink{bibliografia}{1}]}
 \end{figure}
 
 Negli algoritmi evolutivi, il genotipo rappresenta la codifica, mentre il fenotipo rappresenta la soluzione. Pertanto, il genotipo deve essere decodificato per generare il fenotipo. Gli operatori di variazione agiscono a livello di genotipo, mentre la funzione di fitness utilizza il fenotipo dell'individuo associato (Figura 3.5). La fitness di un individuo è un valore calcolato per misurare quanto quella soluzione sia adatta al problema. 
-
+\hypertarget{img5}{}
 \begin{figure}[!ht] 
     \centering 
     \includegraphics[width=0.9\columnwidth]{tesi/decoding} 
-    \caption{Genotipo e fenotipo negli algoritmi evolutivi}
+    \caption[Genotipo e fenotipo negli algoritmi evolutivi]{Genotipo e fenotipo negli algoritmi evolutivi [\hyperlink{bibliografia}{1}]}
 \end{figure}
 
 Nelle sezioni seguenti verranno evidenziate le principali differenze tra le varie famiglie di algoritmi evolutivi. Successivamente, l'attenzione sarà focalizzata sui loro componenti di ricerca comuni.

@@ -21,7 +21,7 @@ Sono state impiegate 72 classi di istanze da 10 istanze ciascuna, per un totale 
 
 \section{Configurazione del GA}
 
-Il test è stato fatto eseguendo l'algoritmo genetico, per tutte le 720 istanze, configurato con la Conf3 (per i motivi citati nella Sezione 5.2.1):
+Il test è stato fatto eseguendo l'algoritmo genetico, per tutte le 720 istanze, configurato con la Conf3 (per i motivi citati nella Sezione 4.2.1):
 \begin{itemize}
     \item\textbf{population\_size}: 50;
 	\item\textbf{crossover\_prob}: 0,7 (70\%);
@@ -33,7 +33,7 @@ Inoltre, è stato impostando il parametro di \emph{pilot\_method\_prob} a 0,1 (o
 
 \section{Risultati}
 
-Per affrontare il problema del nesting, l'azenda utilizza un software in grado di generare schemi di taglio per tecnologie sia di punzonatura che di taglio laser, gestendo i vincoli tecnologici associati. Sebbene il software funzioni come una \emph{black-box}\glsfirstoccur, offre parametri configurabili dall'utente per generare soluzioni in base a diverse esigenze. Il software si è dimostrato altamente affidabile, fornendo costantemente soluzioni di alta qualità anche con limiti di tempo ridotti.
+Per affrontare il problema del nesting, l'azienda utilizza un software in grado di generare schemi di taglio per tecnologie sia di punzonatura che di taglio laser, gestendo i vincoli tecnologici associati. Sebbene il software funzioni come una \emph{black-box}\glsfirstoccur, offre parametri configurabili dall'utente per generare soluzioni in base a diverse esigenze. Il software si è dimostrato altamente affidabile, fornendo costantemente soluzioni di alta qualità anche con limiti di tempo ridotti.
 
 \begin{figure}[!ht] 
     \centering 
@@ -58,4 +58,4 @@ Quindi complessivamente la soluzione aziendale produce un maggior numero di solu
 
 È stato tentato anche un aumento del \emph{pilot\_method\_prob} a 0,5 (50\%) ma ha prodotto risultati peggiori, infatti l'aumento del costo computazionale per l'esecuzione di ogni generazione, rispettando il criterio di arresto a 30 secondi, non ha permesso per alcune istanze di generare abbastanza generazioni per trovare soluzioni migliri che invece, con \emph{pilot\_method\_prob} uguale a 0,1 erano state trovate.
 
-Nella generazione della popolazione iniziale sono stati provati anche altri criteri di ordinamento oltre ad \emph{AREA\_DESCENDING}, come: \emph{LONGER\_SIDE\_DESCENDING} (dal lato lungo maggiore a quello minore), \emph{PERIMETER\_DESCENDING} (dal perimetro maggiore al miniore) e \emph{SIDE\_DIFF\_DESCENDING} (dall'\emph{item} con meno differenza fra altezza e lunghezza a quello con più differenza). Questi criteri di ordinamento hanno ottenuto risultati peggiori (anche utilizzati in combinazione fra di loro e con \emph{AREA\_DESCENDING}) quindi sono stati scartati [\hyperlink{bibliografia}{5}]. 
+Nella generazione della popolazione iniziale sono stati provati anche altri criteri di ordinamento oltre ad \emph{AREA\_DESCENDING}, come: \emph{LONGER\_SIDE\_DESCENDING} (dal lato lungo maggiore a quello minore), \emph{PERIMETER\_DESCENDING} (dal perimetro maggiore al miniore) e \emph{SIDE\_DIFF\_DESCENDING} (dall'\emph{item} con meno differenza fra altezza e lunghezza a quello con più differenza). Questi criteri di ordinamento hanno ottenuto risultati peggiori (anche utilizzati in combinazione fra di loro e con \emph{AREA\_DESCENDING}) quindi sono stati scartati [\hyperlink{bibliografia}{9}]. 

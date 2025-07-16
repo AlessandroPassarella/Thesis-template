@@ -14,16 +14,16 @@
 
 \section{L'azienda} \hypertarget{salvagnini}{}
 
-Il lavoro svolto in questa tesi fa riferimento al periodo di stage svolto presso Salvagnini Italia S.p.A. (da ora in poi abbreviata in Salvagnini). L'azienda, situata nel nord Italia, progetta, produce e commercializza Flexible Manufacturing System (FMS) costituiti da macchine a Controllo Numerico Computerizzato (CNC) per il taglio e la piegatura della lamiera, insieme a software dedicati. I processi in un FMS Salvagnini sono progettati per garantire una produzione personalizzata, massimizzando la produttività e minimizzando sprechi di materiali e consumi. In questo contesto, sorgono numerosi problemi di ottimizzazione, gestiti dal dipartimento di Ricerca e Sviluppo (R\&S)  [\hyperlink{bibliografia}{1}].
+Il lavoro svolto in questa tesi fa riferimento al periodo di stage svolto presso Salvagnini Italia S.p.A. (da ora in poi abbreviata in Salvagnini). L'azienda, situata nel nord Italia, progetta, produce e commercializza Flexible Manufacturing System (FMS) costituiti da macchine a Controllo Numerico Computerizzato (CNC) per il taglio e la piegatura della lamiera, insieme a software dedicati. I processi in un FMS Salvagnini sono progettati per garantire una produzione personalizzata, massimizzando la produttività e minimizzando sprechi di materiali e consumi. In questo contesto, sorgono numerosi problemi di ottimizzazione, gestiti dal dipartimento di Ricerca e Sviluppo (R\&S)  [\hyperlink{bibliografia}{6}].
 
 Da un lato, le macchine sono dotate di un numero crescente di processi automatizzati che eliminano i tempi morti e riducono le possibilità di errore. Dall'altro, una gran parte dell'ottimizzazione viene affrontata a livello software, attraverso lo sviluppo di applicazioni CAD (Computer-Aided Design) e CAM (Computer-Aided Manufacturing). Queste applicazioni assistono gli operatori con strumenti automatici per affrontare problemi complessi, come il modo in cui una macchina deve lavorare le lamiere, l'ordine in cui devono essere eseguite le operazioni, e così via.
 
-\section{Scopo dello stage}
+\section{Scopo e contenuti dello stage}
 
 L’attività di stage prevede lo studio, sviluppo e test di un algoritmo di ottimizzazione per la risoluzione di problemi di nesting di interesse nell’ambiente Salvagnini. In particolare, lo stage vuole verificare l'efficacia di un approccio basato su algoritmi genetici.
 Occorre affrontare inizialmente lo studio della letteratura di Ricerca Operativa nell’ambito degli algoritmi genetici, un metodo evolutivo che classicamente ha riportato risultati significativi in problemi affini a quelli di interesse. Si passa poi alla definizione del problema di nesting in Salvagnini e all’analisi del codice sviluppato internamente per la risoluzione dello stesso. Avviene poi lo sviluppo di una versione dell’algoritmo genetico che risolva il problema di nesting in esame e che allo stesso tempo si integri nell’attuale software di ottimizzazione. Infine, verrà eseguita un’analisi statistica dei risultati prodotti da tale algoritmo, confrontandolo con altri metodi risolutivi già sviluppati dall’azienda, in termini di tempo di esecuzione e di qualità delle soluzioni proposte.
 
-\section{Definizione del problema}
+\section{Il problema del cutting stock nel contesto aziendale}
 
 In Ricerca Operativa, il \emph{Cutting Stock Problem} (CSP) rappresenta una classe di \emph{problemi di ottimizzazione combinatoria}\glsfirstoccur di rilevanza pratica che coinvolge il posizionamento di oggetti più piccoli a oggetti più grandi, generalmente con l'obiettivo di minimizzare gli scarti. I problemi di CSP possono differire tra loro per una grande varietà di caratteristiche. Ad esempio, le dimensioni sia degli oggetti piccoli che di quelli grandi possono variare da 1 a 3 dimensioni. Il caso bidimensionale riguarda il taglio di oggetti (o parti) da fogli di materiale riducendo gli scarti, come avviene nelle industrie del legno, del vetro e della lamiera.
 
@@ -43,15 +43,15 @@ Naturalmente gli oggetti che vengono posizionati su uno stesso foglio non devono
 
 Dal punto di vista delle assegnazioni, vi sono due categorie di elementi: quelli obbligatori e quelli opzionali. Gli elementi obbligatori devono necessariamente essere collocati sul foglio, senza eccezioni. Gli elementi opzionali, invece, vengono utilizzati in funzione della riduzione degli \emph{scarti}\glsfirstoccur. Pertanto, questi ultimi possono non essere posizionati o possono essere posizionati solo alcuni, a seconda delle esigenze specifiche.
 
-Un ulteriore vincolo importante riguarda le \emph{precedenze}\glsfirstoccur. In particolare, si distinguono due tipi di precedenza: hard e soft. Le dimensioni di un oggetto possono influire notevolmente sull'assegnazione delle priorità, in quanto, al fine di ottimizzare lo spazio, posizonare prima un oggetto di grandi dimensioni tende ad essere la scelta migliore. La presenza di molteplici oggetti di grande dimensione richiede la possibilità di avere un ordine anche tra di essi. Le precedenze hard stabiliscono che gli elementi con una priorità più alta devono essere posizionati seguendo l'ordine prestabilito. Questo ordine è rigido e non può essere infranto. Al contrario, le precedenze soft permettono una maggiore flessibilità: esse vanno rispettate solo qualora non comportino un aumento degli scarti. In caso contrario, possono essere infrante per ottimizzare l’utilizzo del materiale.
+Un ulteriore vincolo importante riguarda le \emph{precedenze}\glsfirstoccur. In particolare, si distinguono due tipi di precedenza: hard e soft. A questo proposito, osserviamo che la soluzione potrebbe essere in generale composta da più fogli di lamiera, e che tra questi fogli è definito un ordine di produzione. I vincoli di precedenza richiedono che alcuni oggetti debbano essere posizionati in fogli che saranno prodotti prima di altri. Le precedenze hard stabiliscono che gli elementi con una priorità più alta devono essere posizionati seguendo l'ordine prestabilito. Questo ordine è rigido e non può essere infranto. Al contrario, le precedenze soft permettono una maggiore flessibilità: esse vanno rispettate solo qualora non comportino un aumento degli scarti. In caso contrario, possono essere infrante per ottimizzare l’utilizzo del materiale.
 
 Infine, è necessario considerare le rotazioni consentite. Ogni elemento può essere ruotato per adattarsi meglio al layout, ma solo entro gli angoli permessi dagli strumenti di punzonatura (0°, 90°, 180° e 270°). Questo vincolo garantisce che le operazioni di lavorazione possano essere eseguite senza problemi e rispettando le specifiche tecniche degli strumenti.
 
 Questi vincoli, considerati nel loro insieme, rappresentano un complesso sistema di regole che deve essere gestito attentamente per ottimizzare l’utilizzo del materiale e minimizzare gli scarti, garantendo al contempo che le specifiche di lavorazione vengano rispettate.
 
-\section{Dichiarazione del problema}
+\section{Definizione del problema} \hypertarget{statement}{}
 
-Di seguto è descritto il problema di nesting di forme regolari con tecnologia di taglio a punzonatura [\hyperlink{bibliografia}{5}].
+Di seguito è descritto il problema di nesting di forme regolari con tecnologia di taglio a punzonatura [\hyperlink{bibliografia}{9}], che è oggetto dello stage.
 
 \begin{itemize}
     \item \textbf{Input}
@@ -61,7 +61,7 @@ Di seguto è descritto il problema di nesting di forme regolari con tecnologia d
         \item Dati sugli elementi opzionali: larghezza, altezza, rotazioni consentite, zone di posizionamento proibite e obbligatorie, margini di punzonatura.
     \end{itemize}
     \item \textbf{Output}: sequenza di di layout di taglio.
-    \item \textbf{Vinvoli rigidi}
+    \item \textbf{Vincoli rigidi}
     \begin{itemize}
         \item Quantità massima dei tipi di foglio;
         \item Non sovrapposizione;
@@ -84,13 +84,13 @@ Di seguto è descritto il problema di nesting di forme regolari con tecnologia d
 \begin{description}
     \item[{\hyperref[cap:processi-metodologie]{Il secondo capitolo}}] descrive i vincoli temporali e tecnologici, gli obiettivi, la pianificazione del lavoro e l'analisi dei rischi.
     
-    \item[{\hyperref[cap:descrizione-stage]{Il terzo capitolo}}] tratta l'analisi della letteratura visionata per ottenere la soluzione al problema affrontato;
+    \item[{\hyperref[cap:descrizione-stage]{Il terzo capitolo}}] tratta l'analisi della letteratura visionata per ottenere la soluzione al problema affrontato.
     
-    \item[{\hyperref[cap:analisi-requisiti]{Il quarto capitolo}}] spiega le soluzioni di progettazione e la calibrazione dell'algoritmo;
+    \item[{\hyperref[cap:analisi-requisiti]{Il quarto capitolo}}] spiega le soluzioni di progettazione e la calibrazione dell'algoritmo.
     
-    \item[{\hyperref[cap:progettazione-codifica]{Il quinto capitolo}}] mostra com'è stato implementato l'algoritmo;
+    \item[{\hyperref[cap:progettazione-codifica]{Il quinto capitolo}}] mostra com'è stato implementato l'algoritmo.
     
-    \item[{\hyperref[cap:verifica-validazione]{Il sesto capitolo}}] espone i test eseguiti e i risultati ottenuti;
+    \item[{\hyperref[cap:verifica-validazione]{Il sesto capitolo}}] espone i test eseguiti e i risultati ottenuti.
     
     \item[{\hyperref[cap:conclusioni]{Nel settimo capitolo}}] viene valutata complessivamente l'esperienza, i risultati ottenuti, obiettivi raggiunti e conoscenze aquisite.
 \end{description}
