@@ -1,11 +1,6 @@
 \chapter{Implementazione} \hypertarget{cleancode}{} \hypertarget{chiara2}{}
 \label{cap:progettazione-codifica}
 
-\lstset{
-    escapeinside={(*@}{@*)}, % Delimitatori per modalità LaTeX
-    basicstyle=\ttfamily,    % Stile monospaziato
-}
-
 \intro{Di seguto viene decritto il processo implementativo. In particolare la classe \emph{GA} che modella l'algoritmo genetico e \emph{Chromosome} che facilita la manipolazione dei cromosomi all'interno di \emph{GA}. Sono state utilizzate procedure interne come \emph{PlacementHeuristicEPs} e \emph{PlacementHeuristicEPs\_with\_pilot\_method}, che utilizzano le metriche \emph{CONTACT\_PERIMETER}, \emph{PILOT\_METHOD} e \emph{AREA\_DESCENDING} [\hyperlink{bibliografia}{9}].
 Per rendere il codice più pulito, mantenibile e comprensibile, sono state usate le linee guida espresse in \textbf{Clean Code} [\hyperlink{bibliografia}{5}]} 
 
